@@ -20,6 +20,13 @@ const jobs = [
       appliedDate: "2025-02-28",
       status: "Rejected",
     },
+    {
+      id: 5,
+      company: "Google",
+      role: "Software Engineer",
+      appliedDate: "2025-01-20",
+      status: "Offer",
+    }
   ];
   
   export default jobs;

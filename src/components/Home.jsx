@@ -4,11 +4,9 @@ function Home({ goToApplications }) {
       <h1>Welcome, Sourin 👋</h1>
       <p>What would you like to do today?</p>
 
-      <button
-        className="primary-action"
-        onClick={goToApplications}>
+      <button className="primary-action" onClick={goToApplications}>
         View My Applications
-    </button>
+      </button>
     </div>
   );
 }

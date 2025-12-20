@@ -6,7 +6,7 @@ function App() {
   const [currentView, setCurrentView] = useState("home");
 
   return (
-    <div className="container">
+    <div className="app-container">
       {currentView === "home" && (
         <Home goToApplications={() => setCurrentView("applications")} />
       )}
