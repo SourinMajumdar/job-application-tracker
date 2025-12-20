@@ -7,8 +7,9 @@ body {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 80px;
   margin-bottom: 8px;
+  margin-top: 20%;
 }
 
 h2 {
@@ -19,8 +20,10 @@ h2 {
 
 p {
   color: #4b5563;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 30px;
 }
+
 
 .section-divider {
   border: none;
