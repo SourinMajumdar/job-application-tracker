@@ -26,6 +26,13 @@ const jobs = [
       role: "Software Engineer",
       appliedDate: "2025-01-20",
       status: "Offer",
+    },
+    {
+      id: 6,
+      company: "Microsoft",
+      role: "Software Development Engineer",
+      appliedDate: "2025-05-16",
+      status: "Rejected",
     }
   ];
   
