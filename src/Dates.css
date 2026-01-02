@@ -1,0 +1,233 @@
+/* DATE CARDS */
+
+.date-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background-color: #e5e7eb;
+}
+
+.date-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+.date-card.soon {
+  background-color: #fee2e2;
+}
+
+.date-card.upcoming {
+  background-color: #fef9c3;
+}
+
+.date-card.past {
+  background-color: #e5e7eb;
+}
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;            /* space between date and days-left */
+}
+.date-text {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.date-desc {
+  font-size: 14px;
+  color: #374151;
+  margin-top: 14px;
+}
+
+.date-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+/* LEGEND */
+
+.date-legend {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0 20px;
+  font-size: 13px;
+}
+
+.add-date-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+
+  padding: 8px;
+  border-radius: 999px;
+  border: none;
+
+  background-color: #028b34;
+  color: white;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.add-date-btn:hover {
+  background-color: #167435;
+}
+
+.add-date-text {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: max-width 0.25s ease, margin-left 0.25s ease;
+}
+
+.add-date-btn:hover .add-date-text {
+  max-width: 140px;     /* enough for full text */
+  margin-left: 8px;
+}
+
+.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+  gap: 0;
+  padding: 6px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.edit-text {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #374151;
+
+  transition: max-width 0.2s ease, margin-left 0.2s ease;
+}
+
+.edit-btn:hover .edit-text {
+  max-width: 40px;        /* enough for "Edit" */
+  margin-left: 6px;       /* space between icon & text */
+}
+
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  background: transparent;
+}
+
+.delete-text {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #991b1b;
+  transition: max-width 0.2s ease, margin-left 0.2s ease;
+}
+
+.delete-btn:hover, .edit-btn:hover {
+  background-color: #ffffff;
+}
+
+.delete-btn:hover .delete-text {
+  max-width: 52px;
+  margin-left: 6px;
+}
+
+.secondary-action {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #676767;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.date-delete {
+  background-color: #fee2e2;
+}
+.date-delete:hover {
+  background-color: #ffcdcd;
+}
+
+.days-left {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.days-left.soon {
+  color: #b45309; 
+}
+
+.days-left.upcoming {
+  color: #227c18; 
+}
+.days-left.past {
+  color: #6b7280; 
+}
+
+.top-nav {
+  position: relative;
+}
+
+/* Today date (true center) */
+.today-center {
+  top: -35px;  
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 18px;
+  color: #2a2d33;
+  font-weight: 500;
+}
+
+/* ---------- Mobile tweaks ---------- */
+@media (max-width: 768px) {
+  .date-card {
+    min-height: 80px;
+    padding: 14px 16px;
+  }
+
+  .date-desc {
+    font-size: 14px;         /* slightly smaller text */
+    line-height: 1.2;       /* ⬇ tighter line height */
+    margin-top: 14px;
+  }
+
+  .date-row {
+    align-items: flex-start; /* looks better on small screens */
+  }
+}

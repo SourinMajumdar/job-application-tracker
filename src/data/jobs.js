@@ -5,6 +5,7 @@ const jobs = [
       role: "Software Engineer",
       appliedDate: "2025-03-10",
       status: "Applied",
+      notes: ""
     },
     {
       id: 2,
@@ -12,6 +13,7 @@ const jobs = [
       role: "Backend Developer",
       appliedDate: "2025-03-05",
       status: "Interview",
+      notes: "",
     },
     {
       id: 3,
@@ -19,6 +21,7 @@ const jobs = [
       role: "Associate Software Engineer",
       appliedDate: "2025-02-28",
       status: "Rejected",
+      notes: "",
     },
     {
       id: 5,
@@ -26,6 +29,7 @@ const jobs = [
       role: "Software Engineer",
       appliedDate: "2025-01-20",
       status: "Offer",
+      notes: "",
     },
     {
       id: 6,
@@ -33,8 +37,8 @@ const jobs = [
       role: "Software Development Engineer",
       appliedDate: "2025-05-16",
       status: "Rejected",
+      notes: "",
     }
   ];
   
   export default jobs;
-  

@@ -3,104 +3,181 @@ import ApplicationCard from "./ApplicationCard";
 import { useState, useEffect, useRef } from "react";
 
 function Dashboard() {
-  const [selectedStatus, setSelectedStatus] = useState("All")
+  const [selectedStatus, setSelectedStatus] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+
   const [jobs, setJobs] = useState(() => {
-  const savedJobs = localStorage.getItem("jobs");
+    const savedJobs = localStorage.getItem("jobs");
     return savedJobs ? JSON.parse(savedJobs) : initialJobs;
   });
+
   const [showModal, setShowModal] = useState(false);
+  const [editingJob, setEditingJob] = useState(null);
+
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState(null);
 
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [appliedDate, setAppliedDate] = useState("");
   const [status, setStatus] = useState("Applied");
+  const [notes, setNotes] = useState("");
+  const [notesModalJob, setNotesModalJob] = useState(null);
+  const [focusField, setFocusField] = useState("company");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
   const companyInputRef = useRef(null);
+  const notesTextareaRef = useRef(null);
 
-
-
+  /* ---------------- FILTER + SORT ---------------- */
 
   const filteredJobs = jobs
-    .filter((job) =>
+    .filter(job =>
       selectedStatus === "All" ? true : job.status === selectedStatus
     )
-    .filter((job) =>
+    .filter(job =>
       `${job.company} ${job.role}`
         .toLowerCase()
         .includes(searchTerm.toLowerCase())
-    );
+    )
+    .sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
 
+  /* ---------------- ADD / UPDATE ---------------- */
 
   function handleAddApplication(e) {
     e.preventDefault();
 
-    const newJob = {
-      id: Date.now(),
-      company,
-      role,
-      appliedDate,
-      status,
-    };
+    if (editingJob) {
+      setJobs(prev =>
+        prev.map(job =>
+          job.id === editingJob.id
+            ? { ...job, company, role, appliedDate, status, notes }
+            : job
+        )
+      );
+    } else {
+      setJobs(prev => [
+        {
+          id: Date.now(),
+          company,
+          role,
+          appliedDate,
+          status,
+          notes,
+        },
+        ...prev,
+      ]);
+    }
 
-    setJobs([newJob, ...jobs]);
-
-    // reset form
+    // reset
     setCompany("");
     setRole("");
     setAppliedDate("");
     setStatus("Applied");
-
-    setSelectedStatus("All");
-    setSearchTerm("");
-
+    setNotes("");
+    setEditingJob(null);
     setShowModal(false);
+    setFocusField("company");
   }
+
+  /* ---------------- PERSIST ---------------- */
 
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
-  useEffect(() => {
-    if (showModal) {
-      companyInputRef.current?.focus();
-    }
-  }, [showModal]);
+  /* ---------------- PREFILL FORM ---------------- */
 
+  useEffect(() => {
+    if (!showModal) return;
+
+    if (editingJob) {
+      setCompany(editingJob.company);
+      setRole(editingJob.role);
+      setAppliedDate(editingJob.appliedDate);
+      setStatus(editingJob.status);
+      setNotes(editingJob.notes || "");
+    } else {
+      setCompany("");
+      setRole("");
+      setAppliedDate("");
+      setStatus("Applied");
+      setNotes("");
+    }
+  }, [showModal, editingJob]);
+
+  /* ---------------- FOCUS ---------------- */
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    requestAnimationFrame(() => {
+      if (focusField === "notes") {
+        notesTextareaRef.current?.focus();
+      } else {
+        companyInputRef.current?.focus();
+      }
+    });
+  }, [showModal, focusField]);
+
+  /* ---------------- SCROLL ---------------- */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ---------------- RENDER ---------------- */
 
   return (
     <div>
+      {/* HEADER */}
       <div className="dashboard-header">
-        <h2>Your Applications</h2>
-        <p className="dashboard-subtitle">
-          Track and manage all your job applications in one place
-        </p>
-      </div>
-      <hr className="section-divider" />
-      
-      <div className="top-bar">
-        <button
-          className="add-button" onClick={() => setShowModal(true)}>
-          + Add Application
-        </button>
+        <div className="dashboard-header-row">
+          <h2>Your Applications</h2>
 
+          <button
+            className="add-app-btn"
+            onClick={() => {
+              setEditingJob(null);
+              setFocusField("company");
+              setShowModal(true);
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span className="add-app-text">Add Application</span>
+          </button>
+        </div>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* FILTERS */}
+      <div className="filters-row">
+        <div className="filter-dropdown">
+          <label className="filter-label">Filter:</label>
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="filter-select"
+          >
+            <option value="All">All</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
 
         <div className="search-pill">
-          <svg
-            className="search-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.8"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
-            />
-          </svg>
-
-
           <input
             type="text"
             placeholder="Search by company or role"
@@ -108,76 +185,47 @@ function Dashboard() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input-pill"
           />
-
-          {searchTerm && (
-            <button
-              className="clear-search"
-              onClick={() => setSearchTerm("")}
-            >
-              ✕
-            </button>
-          )}
         </div>
-
-
       </div>
 
-
-      <div className="filters">
-        <button
-          className={selectedStatus === "All" ? "active" : ""}
-          onClick={() => setSelectedStatus("All")}>
-          All
-        </button>
-
-        <button
-          className={selectedStatus === "Applied" ? "active" : ""}
-          onClick={() => setSelectedStatus("Applied")}>
-          Applied
-        </button>
-
-        <button
-          className={selectedStatus === "Interview" ? "active" : ""}
-          onClick={() => setSelectedStatus("Interview")}>
-          Interview
-        </button>
-
-        <button
-          className={selectedStatus === "Rejected" ? "active" : ""}
-          onClick={() => setSelectedStatus("Rejected")}>
-          Rejected
-        </button>
-        <button
-          className={selectedStatus === "Offer" ? "active" : ""}
-          onClick={() => setSelectedStatus("Offer")}
-        >
-          Offer
-        </button>
-      </div>
-
+      {/* CARDS */}
       {filteredJobs.length === 0 ? (
-        <p className="empty-state">
-          No applications match your search.
-        </p>
+        <p className="empty-state">No applications match your search.</p>
       ) : (
-        filteredJobs.map((job) => (
-          <ApplicationCard key={job.id} job={job} searchTerm={searchTerm}/>
-        ))
+        <div className="cards-grid">
+          {filteredJobs.map(job => (
+            <ApplicationCard
+              key={job.id}
+              job={job}
+              searchTerm={searchTerm}
+              onEdit={(field = "company") => {
+                setEditingJob(job);
+                setFocusField(field);
+                setShowModal(true);
+              }}
+              onDelete={() => {
+                setJobToDelete(job);
+                setShowDeleteConfirm(true);
+              }}
+              onOpenNotes={() => setNotesModalJob(job)}
+            />
+          ))}
+        </div>
       )}
 
+      {/* ADD / EDIT MODAL */}
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal">
-            <h3>Add Application</h3>
+            <h3>{editingJob ? "Edit Application" : "Add Application"}</h3>
 
             <form onSubmit={handleAddApplication}>
               <div className="form-group">
                 <label>Company</label>
                 <input
-                  type="text"
+                  ref={companyInputRef}
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  ref={companyInputRef}
                   required
                 />
               </div>
@@ -185,12 +233,10 @@ function Dashboard() {
               <div className="form-group">
                 <label>Role</label>
                 <input
-                  type="text"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   required
                 />
-
               </div>
 
               <div className="form-group">
@@ -213,17 +259,31 @@ function Dashboard() {
                 </select>
               </div>
 
+              <div className="form-group">
+                <label>Notes</label>
+                <textarea
+                  ref={notesTextareaRef}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  rows="3"
+                />
+              </div>
+
               <div className="modal-actions">
                 <button
                   type="button"
                   className="secondary-btn"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    setEditingJob(null);
+                    setFocusField("company");
+                  }}
                 >
                   Cancel
                 </button>
 
                 <button type="submit" className="primary-btn">
-                  Add
+                  {editingJob ? "Update" : "Add"}
                 </button>
               </div>
             </form>
@@ -231,6 +291,85 @@ function Dashboard() {
         </div>
       )}
 
+      {/* DELETE CONFIRMATION */}
+      {showDeleteConfirm && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <p className="delete-confirmation">
+              Are you sure you want to delete this application?
+            </p>
+
+            <div className="modal-actions">
+              <button
+                className="secondary-btn"
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setJobToDelete(null);
+                }}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="delete-btn"
+                onClick={() => {
+                  if (!jobToDelete) return;
+
+                  setJobs(prev =>
+                    prev.filter(job => job.id !== jobToDelete.id)
+                  );
+
+                  setShowDeleteConfirm(false);
+                  setJobToDelete(null);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {notesModalJob && (
+        <div
+          className="modal-backdrop"
+          onClick={() => setNotesModalJob(null)}
+        >
+          <div
+            className="modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3>Note</h3>
+
+            <p style={{ fontSize: "16px", lineHeight: "1.6", textAlign: "justify" }}>
+              {notesModalJob.notes}
+            </p>
+
+            <div className="modal-actions">
+              <button
+                className="primary-btn"
+                onClick={() => setNotesModalJob(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* SCROLL TO TOP */}
+      {showScrollTop && (
+        <button
+          className="scroll-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
