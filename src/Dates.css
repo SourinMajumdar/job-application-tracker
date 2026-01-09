@@ -43,6 +43,7 @@
   font-size: 14px;
   color: #374151;
   margin-top: 14px;
+  text-align: left;
 }
 
 .date-card-actions {
@@ -77,17 +78,13 @@
   transition: all 0.2s ease;
 }
 
-.add-date-btn:hover {
-  background-color: #167435;
-}
-
 .add-date-text {
   max-width: 0;
   overflow: hidden;
   white-space: nowrap;
 
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 
   transition: max-width 0.25s ease, margin-left 0.25s ease;
 }
@@ -97,7 +94,7 @@
   margin-left: 8px;
 }
 
-.edit-btn {
+.date-edit-btn {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
@@ -111,22 +108,12 @@
   background: transparent;
 }
 
-.edit-text {
-  max-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 13px;
-  color: #374151;
-
-  transition: max-width 0.2s ease, margin-left 0.2s ease;
-}
-
-.edit-btn:hover .edit-text {
+.date-edit-btn:hover .edit-text {
   max-width: 40px;        /* enough for "Edit" */
   margin-left: 6px;       /* space between icon & text */
 }
 
-.delete-btn {
+.date-delete-btn {
   display: inline-flex;
   align-items: center;
   gap: 0;
@@ -139,16 +126,7 @@
   background: transparent;
 }
 
-.delete-text {
-  max-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 13px;
-  color: #991b1b;
-  transition: max-width 0.2s ease, margin-left 0.2s ease;
-}
-
-.delete-btn:hover, .edit-btn:hover {
+.date-delete-btn:hover, .date-edit-btn:hover {
   background-color: #ffffff;
 }
 
@@ -159,31 +137,38 @@
 
 .secondary-action {
   margin-top: 30px;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 8px;
+  padding: 20px 30px;
+  font-size: 24px;
   border: none;
-  background-color: #676767;
+  background-image: linear-gradient(to right, #5c6ff4 , #C779D0 50%);
+  background-size: 150% auto;
   color: white;
   cursor: pointer;
-  display: inline-block;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-position 0.15s ease-in-out, box-shadow 0.15s ease;
+
+  font-weight: bold;  
+  border-radius: 99px;
+  border: none;
 }
 
 .secondary-action:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  background-position: right center;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
 }
 
 .date-delete {
-  background-color: #fee2e2;
+  /* background-color: #fee2e2; */
+  color: #600b0b;
+  font-weight: 600;
 }
 .date-delete:hover {
   background-color: #ffcdcd;
 }
 
 .days-left {
+  padding-top: 3px;
   font-size: 12px;
   font-weight: 500;
 }
@@ -229,5 +214,50 @@
 
   .date-row {
     align-items: flex-start; /* looks better on small screens */
+  }
+  .today-center {font-size: 15px;}
+
+  .home-actions {
+    /* flex-direction: column; */
+    align-items: center;
+  }
+  .secondary-action {
+    border-radius: 20px;
+  }
+}
+
+.top-nav, .dashboard-header-row {
+  opacity: 0;
+  transform: translateX(-15px);
+  animation: fadeIn 0.4s ease forwards, moveNav 0.5s ease forwards;
+}
+
+.filters-row {
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.dates-list > * {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardUp 0.45s ease forwards;
+}
+
+.dates-list > *:nth-child(1) { animation-delay: 0.05s; }
+.dates-list > *:nth-child(2) { animation-delay: 0.1s; }
+.dates-list > *:nth-child(3) { animation-delay: 0.15s; }
+.dates-list > *:nth-child(4) { animation-delay: 0.2s; }
+.dates-list > *:nth-child(5) { animation-delay: 0.25s; }
+.dates-list > *:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fadeIn {to { opacity: 1;}}
+
+@keyframes moveNav {to {transform: translateX(0)}}
+
+@keyframes cardUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

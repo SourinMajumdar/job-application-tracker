@@ -28,7 +28,7 @@ function getStatusFromDate(dateStr) {
 }
 
 function ImportantDateCard({ item, onEdit, onDelete }) {
-  const daysLeft = getDaysDiff(item.date);   // ✅ NOW DEFINED
+  const daysLeft = getDaysDiff(item.date);  
   const status = getStatusFromDate(item.date);
 
   return (
@@ -40,9 +40,13 @@ function ImportantDateCard({ item, onEdit, onDelete }) {
           </div>
 
           <span className={`days-left ${status}`}>
-            {daysLeft < 0? "Past" : 
-            daysLeft === 0 ? "Today" : 
-            `${daysLeft} days left`}
+            {daysLeft < 0
+              ? "Past"
+              : daysLeft === 0
+              ? "Today"
+              : daysLeft === 1
+              ? "Tomorrow"
+              : `${daysLeft} days left`}
           </span>
           
         </div>
@@ -51,7 +55,7 @@ function ImportantDateCard({ item, onEdit, onDelete }) {
       </div>
 
       <div className="date-card-actions">
-        <button className="edit-btn" onClick={onEdit}>
+        <button className="date-edit-btn edit-btn" onClick={onEdit}>
           <svg
             width="16"
             height="16"
@@ -68,7 +72,7 @@ function ImportantDateCard({ item, onEdit, onDelete }) {
           <span className="edit-text">Edit</span>
         </button>
 
-        <button className="delete-btn" onClick={onDelete}>
+        <button className="date-delete-btn delete-btn" onClick={onDelete}>
           <svg
             width="16"
             height="16"
