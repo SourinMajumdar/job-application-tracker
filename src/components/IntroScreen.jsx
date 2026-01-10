@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { color, motion, transform } from "framer-motion";
 import { useEffect } from "react";
 
 const bg = "linear-gradient(180deg, #FFF5EB 0%, #FFE8D6 60%, #FFFFFF 100%)";
@@ -57,7 +57,8 @@ export default function IntroScreen({ onFinish }) {
 
       {/* Applyo */}
       <div style={styles.wordmark}>
-        {["A", "p", "p", "l", "y", "O"].map((char, i) => (
+        {/* tracker — letter by letter */}
+        {["T", "r", "a", "c", "k"].map((char, i) => (
           <motion.span
             key={i}
             initial={{ opacity: 0 }}
@@ -67,6 +68,20 @@ export default function IntroScreen({ onFinish }) {
             {char}
           </motion.span>
         ))}
+
+        {/* mate — pill joins from right */}
+        <motion.span
+          style={styles.matePill}
+          initial={{ x: 28, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            delay: 1 + 5 * 0.18 + 0.2,
+            duration: 0.6,
+            ease: "easeOut",
+          }}
+        >
+          mate
+        </motion.span>
       </div>
 
       {/* Subtitle */}
@@ -108,4 +123,20 @@ const styles = {
     letterSpacing: "0.08em",
     opacity: 0.85,
   }, 
+  mate: {
+    marginLeft: "6px",
+    fontWeight: 600,
+  },
+  matePill: {
+    marginLeft: "8px",
+    padding: "0 14px",
+    borderRadius: "0.35em",
+    backgroundColor: "#757d8c", 
+    color: "#FFFFFF",
+    fontWeight: 800,
+    fontSize: "0.92em",
+    lineHeight: 1,
+    display: "flex",
+    alignItems: "center",
+  },
 };

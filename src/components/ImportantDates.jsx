@@ -223,7 +223,7 @@ function ImportantDates() {
 
       {/* CARDS */}
       {filteredDates.length === 0 ? (
-        <p className="empty-state">No important dates found.</p>
+        <p className="empty-state">No important dates found :(</p>
       ) : (
         <div className="dates-list">
           {filteredDates.map(item => (

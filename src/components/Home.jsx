@@ -1,4 +1,6 @@
 import Insights from "./Insights";
+// import { SunIcon, MoonIcon } from "./Themeicons";
+
 
 function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], dates = []}) {
 
@@ -14,10 +16,22 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
             target="_blank" 
             rel="noopener noreferrer" 
             style={{textDecoration: 'none'}}>
-            <span className="app-name">ApplyO</span>
+            <span className="app-name">track<span style={{color: 'rgb(255, 221, 0)'}}>mate</span></span>
           </a>
         </div>
-        <button className="theme-toggle">🌙</button>
+
+        {/* <button
+          className="theme-toggle"
+          onClick={() =>
+            setTheme(t => (t === "light" ? "dark" : "light"))
+          }
+          aria-label="Toggle theme"
+        >
+          <span className="icon-wrapper">
+            {theme === "dark" ? <MoonIcon /> : <SunIcon />}
+          </span>
+        </button> */}
+
       </div>
 
       <div className="home-container">
@@ -66,9 +80,9 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
       <footer className="home-footer">
         © {new Date().getFullYear()}  
         <a href="https://github.com/SourinMajumdar/job-application-tracker.git"
-          target="_blank" style={{textDecoration: 'none', color: 'inherit', fontWeight: 'bold'}}> ApplyO </a>· 
+          target="_blank" style={{textDecoration: 'none', color: 'rgba(25, 47, 118, 0.71)', fontWeight: 'bold'}}> trackmate </a>· 
         <a href="https://github.com/SourinMajumdar" 
-          target="_blank" style={{textDecoration: 'none', color: 'inherit'}}> Sourin Majumdar</a>
+          target="_blank" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.61)'}}> Sourin Majumdar</a>
       </footer>
     </>
   );

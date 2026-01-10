@@ -218,7 +218,7 @@ function Dashboard() {
 
       {/* CARDS */}
       {filteredJobs.length === 0 ? (
-        <p className="empty-state">No applications match your search :(</p>
+        <p className="empty-state">No applications found :(</p>
       ) : (
         <div className="cards-grid">
           {filteredJobs.map(job => (

@@ -5,10 +5,6 @@ body {
   padding: 0;
   color: #111827;
 }
-#root {
-    background: linear-gradient(180deg, #ffffff 0%, #fff0e5 40%, #ffeafa 100%);
-    background-attachment: fixed;
-  }
 
 input, select, textarea {
   box-sizing: border-box;
@@ -36,10 +32,15 @@ p {
 
 .home-actions {
   display: flex;
-  margin-top: 0px;
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+@media (min-width: 769px) {
+  .home-actions {
+    margin-top: 70px;
+  }
 }
 
 .delete-confirmation {
@@ -743,11 +744,12 @@ textarea:focus {
 .empty-soon {
   font-style: oblique;
   font-size: 22px;
+  text-align: right;
 }
 
 .upcoming {text-align: right;}
 @media (max-width: 768px) {
-  .upcoming {text-align: left;}
+  .upcoming, .empty-soon {text-align: left;}
   .insights-left, .insights-right {
     transform: scale(0.9)
   }
@@ -909,7 +911,7 @@ textarea:focus {
 .home-topbar {
   background-image: linear-gradient(to right, #5c6ff4 5%, #7988f7 , #c98dd0 60%);
   position: sticky;
-  top: 0;
+  top: 50;
 
   position: relative;
   z-index: 100;
@@ -977,6 +979,7 @@ textarea:focus {
 }
 
 /* ABOUT PAGE */
+
 
 .about-container {
   max-width: 1000px;
@@ -1160,11 +1163,6 @@ textarea:focus {
   .about-footer .signature {
     font-size: 16px;
   }
-
-  #root {
-    background: linear-gradient(180deg, #ffffff 0%, #fff0e5 40%, #ffeafa 100%);
-    background-attachment: fixed;
-  }
 }
 
  /* -------------------- LOADING ANIMATIONS -------------- */
@@ -1226,28 +1224,48 @@ textarea:focus {
   z-index: 1;
 }
 
-/* Big subtle background ApplyO */
 .about-bg-logo {
-  position: absolute;     
-  top: 50px;
-  margin-left: 200px;   
+  position: absolute;
+  top: 80px;
+  margin-left: 150px;
 
-  font-size: 200px;
+  font-size: 150px;
   font-weight: 900;
   letter-spacing: 0.05em;
 
-  color: rgba(15, 119, 183, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  color: rgba(1, 65, 104, 0.18);
   pointer-events: none;
   user-select: none;
   z-index: 0;
 }
 
+/* Track text inherits color */
+.track-text {
+  line-height: 1;
+}
+
+/* Pill mate */
+.mate-pill-bg {
+  padding: 0.01em 0.2em;
+  border-radius: 0.3em;
+
+  background: rgba(1, 65, 104, 0.18); 
+  color: rgb(255, 255, 255);    
+
+  line-height: 1;
+}
+
+
 @media (max-width: 768px) {
   .about-bg-logo {
     margin-right: 20px;
-    top: 30px;
-    right: -20px;
-    font-size: 100px;
+    top: 80px;
+    right: 0px;
+    font-size: 65px;
   }
 }
 
@@ -1357,7 +1375,6 @@ textarea:focus {
   
   .search-pill {width: 155px;}
   
-  
   h1 {font-size: 30px;}
   
   .primary-action, .secondary-action, .third-action {
@@ -1417,10 +1434,3 @@ textarea:focus {
 @media (min-width: 769px) {
   .scroll-hint, .actions-below, .mobile-only-scroll { display: none; }
 }
-
-/* @media (hover: none) and (pointer: coarse) {
-  .about-section {
-    transform: none !important;
-    background: transparent !important;
-  }
-} */

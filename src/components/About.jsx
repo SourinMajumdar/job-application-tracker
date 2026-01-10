@@ -47,19 +47,25 @@ function About() {
   
   return (
     <>
-    <motion.div className="about-bg-logo stardos-stencil-bold"
-      variants={logoVariant} initial="hidden" animate="visible"
-    >ApplyO
+    <motion.div
+      className="about-bg-logo stardos-stencil-bold"
+      variants={logoVariant}
+      initial="hidden"
+      animate="visible"
+    >
+      <span className="track-text">track</span>
+      <span className="mate-pill-bg">mate</span>
     </motion.div>
+
     <motion.div className="about-container" variants={containerVariant}
       initial="hidden" animate="visible"
     >
 
       {/* HERO */}
       <motion.section className="about-hero" variants={sectionVariant}>
-        <h1 className="about-title">About ApplyO</h1>
+        <h1 className="about-title">About Trackmate</h1>
         <p className="about-subtitle">
-          ApplyO is a focused, single-user web application designed to help
+          Trackmate is a focused, single-user web application designed to help
           individuals track job applications and important career-related dates
           in a structured, low-distraction environment.
         </p>
@@ -81,7 +87,7 @@ function About() {
         whileTap={canHover ? undefined : undefined}
       >
         <h2>What this app does</h2>
-        <p>ApplyO provides a centralized workspace to:</p>
+        <p>Trackmate provides a centralized workspace to:</p>
 
         <ul className="about-list">
           <li>Keep track of job applications with status (Applied/ Interview/ Offer/ Rejected)</li>
@@ -135,7 +141,7 @@ function About() {
         </ul>
 
         <p>
-          ApplyO was built to solve that gap - a personal, intentional system
+          Trackmate was built to solve that gap - a personal, intentional system
           rather than a generic dashboard.
         </p>
       </motion.section>
@@ -249,7 +255,7 @@ function About() {
         <h2>Technology stack</h2>
 
         <p>
-          ApplyO is built using a modern, lightweight front-end stack with a strong
+          Trackmate is built using a modern, lightweight front-end stack with a strong
           emphasis on performance, clarity, and maintainability.
         </p>
 
@@ -422,6 +428,26 @@ function About() {
               </p>
             </div>
           </li>
+          
+          <li className="feature-item">
+            <span className="feature-icon">
+              {/* Dark mode */}
+              <svg width="22" height="22" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+              </svg>
+            </span>
+
+            <div>
+              <strong>Dark mode</strong>
+              <p>
+                A theme-aware interface designed for low-light usage and accessibility,
+                scheduled for a future iteration.
+              </p>
+            </div>
+          </li>
 
           <li className="feature-item">
             <span className="feature-icon">
@@ -461,6 +487,7 @@ function About() {
               </p>
             </div>
           </li>
+
 
           <li className="feature-item">
             <span className="feature-icon">
