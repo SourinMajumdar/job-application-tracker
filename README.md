@@ -1,34 +1,48 @@
-# Job Application Tracker
+# Trackmate – Job Application Tracker
 
-A React-based web application to track and manage job applications in one place.  
-It allows users to add applications, filter by status, search by company or role, and persist data across sessions.
+Trackmate is a frontend web application that helps users **track job applications, monitor application statuses, and manage important hiring dates** in one place.  
+It is designed to be simple, clean, and focused on improving personal job application workflows.
 
-🔗 **Live Demo:** https://job-application-tracker-by-sm.netlify.app
+🔗 **Live Demo:** https://trackmateui.netlify.app
 
 ---
 
 ## ✨ Features
 
-- 📋 Add new job applications using a modal form
-- 🔍 Search applications by company name or job role
-- 🏷️ Filter applications by status:
-  - Applied
-  - Interview
-  - Offer
-  - Rejected
-- 💾 Persistent data using `localStorage`
-- 🖥️ Clean, dashboard-style UI
-- ⚡ Fast build and deployment using Vite + Netlify
+- Add, edit, and delete job applications
+- Track application status (Applied, Interview, Offer, Rejected, etc.)
+- Manage important hiring dates such as follow-ups and deadlines
+- Search and filter applications based on status
+- Persistent data storage using browser localStorage
+- Clean dashboard-style UI
+- Smooth intro animations and UI transitions
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React (Vite)
-- **Styling:** CSS (Flexbox-based layout)
-- **State Management:** React Hooks (`useState`, `useEffect`)
-- **Persistence:** Browser `localStorage`
-- **Deployment:** Netlify (CI/CD via GitHub)
+- **Frontend:** React.js (Functional Components)
+- **Language:** JavaScript (ES6+)
+- **Build Tool:** Vite
+- **Styling:** HTML5, CSS3, Flexbox
+- **Animations:** Framer Motion
+- **Storage:** Browser localStorage
+- **Deployment:** Netlify
+
+---
+
+## 🎯 Project Motivation
+
+Keeping track of multiple job applications across different platforms can quickly become overwhelming.  
+Trackmate was built to provide a **centralized, lightweight solution** for organizing applications and important dates without requiring authentication or backend services.
+
+---
+
+## 📸 Screens & UI
+
+- Animated intro screen for a polished first impression
+- Dashboard-style layout focused on clarity and usability
+- Modal-based forms for adding and editing data
 
 ---
 
@@ -38,13 +52,51 @@ Follow these steps to run the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/job-application-tracker-by-sm.git
+git clone https://github.com/your-username/job-application-tracker.git
 
-# Navigate into the project
-cd job-application-tracker-by-sm
+# Navigate to the project directory
+cd trackmate
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start the development server
 npm run dev
+```
+
+The application will be available at: ```http://localhost:5173```
+
+---
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+This generates an optimized production build in the `dist` folder.
+
+---
+
+## 📌 Notes
+
+- This is a **client-side, single-user application**
+- No authentication or backend is used
+- All data is stored locally in the browser
+
+---
+
+## 🔮 Future improvements
+
+- Dark mode support
+- Functional insights
+- Job search support
+- ATS-aware tooling
+- Multi-user support
+
+---
+
+## 👤 Author
+
+Built by **Sourin**  
+Frontend-focused project showcasing React, UI design, and client-side state management.
