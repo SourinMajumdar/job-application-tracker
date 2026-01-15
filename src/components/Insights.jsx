@@ -1,3 +1,5 @@
+import { Briefcase, CheckCircle, Calendar, Trophy, CircleX, TrendingUp } from 'lucide-react';
+
 function getDaysDiff(dateStr) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -50,58 +52,94 @@ function Insights({ jobs = [], dates = [] }) {
     <div className="home-insights">
       {/* LEFT: INSIGHTS */}
       <div className="insights-left">
-        <h3 className="section-title">Insights</h3>
+        <div className="section-header">
+          <TrendingUp className="section-icon" size={28} strokeWidth={2.5} />
+          <h3 className="section-title">Your Progress</h3>
+        </div>
 
         {/* TOP ROW */}
         <div className="stats-top">
           <div className="stat-card total">
-            <span className="stat-number">{stats.total}</span>
-            <span className="stat-label"> Total</span>
+            <div className="stat-icon-wrapper total-icon">
+              <Briefcase size={32} strokeWidth={2.5} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-number">{stats.total}</span>
+              <span className="stat-label">Total Applications</span>
+            </div>
           </div>
 
           <div className="stat-card applied">
-            <span className="stat-number">{stats.applied}</span>
-            <span className="stat-label"> Applied</span>
+            <div className="stat-icon-wrapper applied-icon">
+              <CheckCircle size={28} strokeWidth={2.5} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-number">{stats.applied}</span>
+              <span className="stat-label">Applied</span>
+            </div>
           </div>
         </div>
 
         {/* BOTTOM ROW */}
         <div className="stats-bottom">
           <div className="stat-card interview">
-            <span className="stat-number">{stats.interview}</span>
-            <span className="stat-label"> Interview</span>
+            <div className="stat-icon-wrapper interview-icon">
+              <Calendar size={24} strokeWidth={2.5} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-number">{stats.interview}</span>
+              <span className="stat-label">Interviews</span>
+            </div>
           </div>
 
           <div className="stat-card offer">
-            <span className="stat-number">{stats.offer}</span>
-            <span className="stat-label"> Offers</span>
+            <div className="stat-icon-wrapper offer-icon">
+              <Trophy size={24} strokeWidth={2.5} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-number">{stats.offer}</span>
+              <span className="stat-label">Offers</span>
+            </div>
           </div>
 
           <div className="stat-card rejected">
-            <span className="stat-number">{stats.rejected}</span>
-            <span className="stat-label"> Rejected</span>
+            <div className="stat-icon-wrapper rejected-icon">
+              <CircleX size={24} strokeWidth={2.5} />
+            </div>
+            <div className="stat-content">
+              <span className="stat-number">{stats.rejected}</span>
+              <span className="stat-label">Rejected</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* RIGHT: UPCOMING */}
       <div className="insights-right">
-        <h3 className="section-title upcoming">Upcoming</h3>
+        <h3 className="section-title upcoming">Upcoming Events</h3>
 
         {soonDates.length > 0 ? (
           <div className="soon-list">
             {soonDates.map(item => (
               <div key={item.id} className="soon-card">
+                <div className="soon-date-badge">
+                  <Calendar size={16} strokeWidth={2.5} />
+                  {item.daysLeft === 0 ? "Today" : item.daysLeft === 1 ? "Tomorrow" : `${item.daysLeft} days`}
+                </div>
                 <div className="soon-desc">{item.description}</div>
                 <div className="soon-meta">
-                  <span style={{ fontWeight: "600" }}> {formatDate(item.date)} </span>{" "} ·{" "}
-                  {item.daysLeft === 0 ? "Today" : item.daysLeft === 1 ? "Tomorrow" : `in ${item.daysLeft} days`}
+                  {formatDate(item.date)}
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="empty-soon">Nothing coming up soon</p>
+          <div className="empty-soon-wrapper">
+            <div className="empty-soon-icon">
+              <Calendar size={48} strokeWidth={1.5} />
+            </div>
+            <p className="empty-soon">Nothing coming up soon</p>
+          </div>
         )}
       </div>
     </div>

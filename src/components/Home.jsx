@@ -1,13 +1,12 @@
 import Insights from "./Insights";
-// import { SunIcon, MoonIcon } from "./Themeicons";
-
+import { Briefcase, Calendar, Info, ArrowRight } from 'lucide-react';
 
 function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], dates = []}) {
 
   return (
     <>
       <div className="scroll-hint">
-        ↓ Scroll for actions
+        ↓ Scroll for insights
       </div>
     
       <div className="home-topbar">
@@ -19,49 +18,57 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
             <span className="app-name">track<span style={{color: 'rgb(255, 221, 0)'}}>mate</span></span>
           </a>
         </div>
-
-        {/* <button
-          className="theme-toggle"
-          onClick={() =>
-            setTheme(t => (t === "light" ? "dark" : "light"))
-          }
-          aria-label="Toggle theme"
-        >
-          <span className="icon-wrapper">
-            {theme === "dark" ? <MoonIcon /> : <SunIcon />}
-          </span>
-        </button> */}
-
       </div>
 
       <div className="home-container">
-        {/* TOP BAR */}
+        {/* HERO SECTION */}
+        <div className="hero-section">
+          <div className="hero-content">
+            <div className="hero-badge">
+              <Briefcase size={16} strokeWidth={2.5} />
+              <span>Job Application Tracker</span>
+            </div>
+            <h1 className="hero-title">
+              Manage Your <span className="gradient-text">Job Hunt</span>
+            </h1>
+            <p className="hero-subtitle">
+              Track applications, schedule interviews, and land your dream job — all in one beautiful interface
+            </p>
+          </div>
+          <div className="hero-illustration">
+            <img 
+              src="/workspace-illustration.svg" 
+              alt="Professional workspace" 
+              className="illustration-image"
+            />
+          </div>
+        </div>
+
         {/* INSIGHTS */}
         <Insights jobs={jobs} dates={dates} />
 
         {/* ACTIONS */}
-        <div className="actions-below">
-          Actions:
-        </div>
-        <div className="home-actions">
-          <button className="primary-action" onClick={goToApplications}>
-            View Applications
-          </button>
+        <div className="actions-section">
+          <h3 className="actions-title">Quick Actions</h3>
+          <div className="home-actions">
+            <button className="primary-action" onClick={goToApplications}>
+              <Briefcase size={20} strokeWidth={2.5} />
+              <span>View Applications</span>
+              <ArrowRight size={18} strokeWidth={2.5} className="arrow-icon" />
+            </button>
 
-          <button
-            className="secondary-action"
-            onClick={goToImportantDates}
-          >
-            View Important Dates
-          </button>
+            <button className="secondary-action" onClick={goToImportantDates}>
+              <Calendar size={20} strokeWidth={2.5} />
+              <span>Important Dates</span>
+              <ArrowRight size={18} strokeWidth={2.5} className="arrow-icon" />
+            </button>
 
-          <button
-            className="third-action"
-            onClick={goToAbout}
-          >
-            About this app
-          </button>
-
+            <button className="third-action" onClick={goToAbout}>
+              <Info size={20} strokeWidth={2.5} />
+              <span>About This App</span>
+              <ArrowRight size={18} strokeWidth={2.5} className="arrow-icon" />
+            </button>
+          </div>
         </div>
       </div>
 
