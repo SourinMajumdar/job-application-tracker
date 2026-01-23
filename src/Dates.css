@@ -135,28 +135,7 @@
   margin-left: 6px;
 }
 
-.secondary-action {
-  margin-top: 30px;
-  padding: 20px 30px;
-  font-size: 24px;
-  border: none;
-  background-image: linear-gradient(to right, #5c6ff4 , #C779D0 50%);
-  background-size: 150% auto;
-  color: white;
-  cursor: pointer;
-  
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: background-position 0.15s ease-in-out, box-shadow 0.15s ease;
 
-  font-weight: bold;  
-  border-radius: 99px;
-  border: none;
-}
-
-.secondary-action:hover {
-  background-position: right center;
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-}
 
 .date-delete {
   /* background-color: #fee2e2; */
@@ -220,9 +199,6 @@
   .home-actions {
     /* flex-direction: column; */
     align-items: center;
-  }
-  .secondary-action {
-    border-radius: 20px;
   }
 }
 

@@ -1,4 +1,4 @@
-import { color, motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 
 const bg = "linear-gradient(180deg, #FFF5EB 0%, #FFE8D6 60%, #FFFFFF 100%)";
@@ -6,10 +6,11 @@ const primary = "#374151";
 const secondary = "#6B7280";
 
 export default function IntroScreen({ onFinish }) {
+  const INTRO_DURATION = 3200;
   useEffect(() => {
     const timer = setTimeout(() => {
       onFinish();
-    }, 3200); // full animation duration
+    }, INTRO_DURATION); // full animation duration
 
     return () => clearTimeout(timer);
   }, [onFinish]);

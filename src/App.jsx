@@ -9,16 +9,22 @@ import initialDates from "./data/importantDates";
 import About from "./components/About";
 import IntroScreen from "./components/IntroScreen";
 
+import { useAuth } from "./context/AuthContext.jsx";
+import Auth from "./components/Auth";
+
 function App() {
+  const { user } = useAuth();
+
   const [currentView, setCurrentView] = useState("home");
-  // const [theme, setTheme] = useState("light"); // default light
+
+  // INTRO — every refresh (or until seen)
+  const [showIntro, setShowIntro] = useState(() => {
+    return localStorage.getItem("introSeen") !== "true";
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [currentView]);
-  
-  // INTRO — every refresh
-  const [showIntro, setShowIntro] = useState(true);
 
   // JOBS STATE
   const [jobs, setJobs] = useState(() => {
@@ -51,88 +57,83 @@ function App() {
         {/* 🔹 INTRO SCREEN */}
         <AnimatePresence>
           {showIntro && (
-            <IntroScreen onFinish={() => setShowIntro(false)} />
+            <IntroScreen 
+              onFinish={() => {
+                localStorage.setItem("introSeen", "true");
+                setShowIntro(false);
+              }}
+            />
           )}
         </AnimatePresence>
 
-        {/* 🔹 MAIN APP */}
+        {/* 🔹 AFTER INTRO: AUTH OR APP */}
         {!showIntro && (
           <>
-            {currentView === "home" && (
-              <Home
-                // theme={theme} setTheme={setTheme}
-                key={currentView}  
-                goToApplications={() => setCurrentView("applications")}
-                goToImportantDates={() => setCurrentView("important-dates")}
-                goToAbout={() => setCurrentView("about")}
-                jobs={jobs}
-                dates={importantDates}
-              />
-            )}
-
-
-            {currentView === "applications" && (
+            {!user ? (
+              <Auth />
+            ) : (
               <>
-                <button
-                  className="back-home-btn"
-                  onClick={() => setCurrentView("home")}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                  <span>Home</span>
-                </button>
+                {currentView === "home" && (
+                  <Home
+                    key={currentView}  
+                    goToApplications={() => setCurrentView("applications")}
+                    goToImportantDates={() => setCurrentView("important-dates")}
+                    goToAbout={() => setCurrentView("about")}
+                    jobs={jobs}
+                    dates={importantDates}
+                  />
+                )}
 
-                <Dashboard jobs={jobs} setJobs={setJobs} />
-              </>
-            )}
+                {currentView === "applications" && (
+                  <>
+                    <button
+                      className="back-home-btn"
+                      onClick={() => setCurrentView("home")}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                      <span>Home</span>
+                    </button>
 
-            {currentView === "important-dates" && (
-              <>
-                <button
-                  className="back-home-btn"
-                  onClick={() => setCurrentView("home")}
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                  <span>Home</span>
-                </button>
+                    <Dashboard jobs={jobs} setJobs={setJobs} />
+                  </>
+                )}
 
-                <ImportantDates
-                  dates={importantDates}
-                  setDates={setImportantDates}
-                />
-              </>
-            )}
+                {currentView === "important-dates" && (
+                  <>
+                    <button
+                      className="back-home-btn"
+                      onClick={() => setCurrentView("home")}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                      <span>Home</span>
+                    </button>
 
-            {currentView === "about" && (
-              <>
-                <button
-                  className="back-home-btn"
-                  onClick={() => setCurrentView("home")}
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                  <span>Home</span>
-                </button>
+                    <ImportantDates
+                      dates={importantDates}
+                      setDates={setImportantDates}
+                    />
+                  </>
+                )}
 
-                <About />
+                {currentView === "about" && (
+                  <>
+                    <button
+                      className="back-home-btn"
+                      onClick={() => setCurrentView("home")}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                      <span>Home</span>
+                    </button>
+
+                    <About />
+                  </>
+                )}
               </>
             )}
           </>

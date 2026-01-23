@@ -1,14 +1,5 @@
 import { Briefcase, CheckCircle, Calendar, Trophy, CircleX, TrendingUp } from 'lucide-react';
-
-function getDaysDiff(dateStr) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const target = new Date(dateStr);
-  target.setHours(0, 0, 0, 0);
-
-  return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
-}
+import { getDaysDiff } from '../utils/dateUtils';
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -54,7 +45,7 @@ function Insights({ jobs = [], dates = [] }) {
       <div className="insights-left">
         <div className="section-header">
           <TrendingUp className="section-icon" size={28} strokeWidth={2.5} />
-          <h3 className="section-title">Your Progress</h3>
+          <h3 className="section-title">Insights</h3>
         </div>
 
         {/* TOP ROW */}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import initialDates from "../data/importantDates";
 import ImportantDateCard from "./ImportantDateCard";
 import "../Dates.css";
+import { getDaysDiff, getStatusFromDate } from "../utils/dateUtils";
 
 function formatToday() {
   return new Date().toLocaleDateString("en-GB", {
@@ -9,24 +10,6 @@ function formatToday() {
     month: "short",
     year: "numeric",
   });
-}
-
-function getDaysDiff(dateStr) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const target = new Date(dateStr);
-  target.setHours(0, 0, 0, 0);
-  
-  return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
-}
-
-function getStatusFromDate(dateStr) {
-  const daysLeft = getDaysDiff(dateStr);
-
-  if (daysLeft < 0) return "past";
-  if (daysLeft <= 7) return "soon";
-  return "upcoming";
 }
 
 function ImportantDates() {

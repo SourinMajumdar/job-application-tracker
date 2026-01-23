@@ -1,44 +1,51 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
-const logoVariant = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
+import { 
+  Briefcase, 
+  Calendar, 
+  TrendingUp, 
+  Database, 
+  Code2, 
+  Palette, 
+  Zap, 
+  Moon, 
+  Search, 
+  FileText, 
+  Users,
+  Heart,
+  ArrowUp,
+  Sparkles,
+  Target,
+  CheckCircle2
+} from 'lucide-react';
+import {FaReact, FaJs, FaCss3Alt} from 'react-icons/fa';
+import { SiFramer } from "react-icons/si";
 
 const containerVariant = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const sectionVariant = {
-  hidden: { opacity: 0, x: -30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
-
 function About() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const canHover =
-  typeof window !== "undefined" &&
-  window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 200);
+      setShowScrollTop(window.scrollY > 300);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,497 +54,352 @@ function About() {
   
   return (
     <>
-    <motion.div
-      className="about-bg-logo stardos-stencil-bold"
-      variants={logoVariant}
-      initial="hidden"
-      animate="visible"
-    >
-      <span className="track-text">track</span>
-      <span className="mate-pill-bg">mate</span>
-    </motion.div>
-
-    <motion.div className="about-container" variants={containerVariant}
-      initial="hidden" animate="visible"
-    >
-
-      {/* HERO */}
-      <motion.section className="about-hero" variants={sectionVariant}>
-        <h1 className="about-title">About Trackmate</h1>
-        <p className="about-subtitle">
-          Trackmate is a focused, single-user web application designed to help
-          individuals track job applications and important career-related dates
-          in a structured, low-distraction environment.
-        </p>
-        <p className="about-subtitle">
-          It is intentionally minimal, local-first, and privacy-respecting -
-          built to solve a very specific problem well.
-        </p>
-      </motion.section>
-
-      {/* WHAT */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(201, 250, 255, 0.5)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-        whileTap={canHover ? undefined : undefined}
+      <motion.div 
+        className="about-container-new" 
+        variants={containerVariant}
+        initial="hidden" 
+        animate="visible"
       >
-        <h2>What this app does</h2>
-        <p>Trackmate provides a centralized workspace to:</p>
+        {/* HERO SECTION */}
+        <motion.div className="about-hero-new" variants={sectionVariant}>
+          <h1 className="about-title-new">
+            About <span className="gradient-text-about">Trackmate</span>
+          </h1>
+          <p className="about-subtitle-new">
+            Trackmate is a focused, single-user web application designed to help
+            individuals track job applications and important career-related dates
+            in a structured, low-distraction environment.
+          </p>
+          <p className="about-subtitle-new">
+            It is intentionally minimal, local-first, and privacy-respecting -
+            built to solve a very specific problem well.
+          </p>
+        </motion.div>
 
-        <ul className="about-list">
-          <li>Keep track of job applications with status (Applied/ Interview/ Offer/ Rejected)</li>
-          <li>
-            Maintain important dates such as interviews, follow-ups, and
-            deadlines
-          </li>
-          <li>Surface high-level insights without overwhelming the user</li>
-          <li>
-            Keep all data stored locally for speed, privacy, and reliability
-          </li>
-        </ul>
-
-        <p>
-          The goal is not to replace large job portals, but to act as a personal
-          execution and awareness layer during the job application process.
-        </p>
-      </motion.section>
-
-      {/* WHY */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(193, 255, 200, 0.399)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-      >
-        <h2>Why I built this</h2>
-        <p>
-          During active job applications, I found that existing tools were
-          either:
-        </p>
-
-        <ul className="about-list">
-          <li>Too complex for individual use</li>
-          <li>Built around recruiters rather than applicants</li>
-          <li>
-            Overloaded with features that added noise instead of clarity
-          </li>
-        </ul>
-
-        <p>I wanted a tool that:</p>
-
-        <ul className="about-list">
-          <li>Updates instantly</li>
-          <li>Feels calm rather than stressful</li>
-          <li>Gives visibility without micromanagement</li>
-          <li>Respects user data by default</li>
-        </ul>
-
-        <p>
-          Trackmate was built to solve that gap - a personal, intentional system
-          rather than a generic dashboard.
-        </p>
-      </motion.section>
-
-      {/* FEATURES */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(250, 255, 196, 0.5)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-      >
-        <h2>Existing features</h2>
-
-        <ul className="about-list feature-list">
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Briefcase / Applications */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Application tracking</strong>
-              <p>
-                Keep track of job applications with clear status of application (Applied/ Interview/ Offer/ Rejected), notes per
-                application, and flexible search and filtering across all fields.
-              </p>
-            </div>
-          </li>
-
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Calendar / Dates */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Important dates</strong>
-              <p>
-                Manage interviews, follow-ups, and deadlines with smart “days left”
-                indicators and automatic prioritization of upcoming and overdue events.
-              </p>
-            </div>
-          </li>
-
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Bar chart / Insights */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="20" x2="12" y2="10" />
-                <line x1="18" y1="20" x2="18" y2="4" />
-                <line x1="6" y1="20" x2="6" y2="16" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Insights</strong>
-              <p>
-                View derived statistics and upcoming activity highlights based on your
-                tracked applications and important dates.
-              </p>
-            </div>
-          </li>
-
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Database / Local storage */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3" />
-                <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Local-first persistence</strong>
-              <p>
-                All data is stored locally in the browser, ensuring fast performance,
-                offline reliability, and complete privacy without external services.
-              </p>
-            </div>
-          </li>
-        </ul>
-
-      </motion.section>
-
-      {/* TECH STACK */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(247, 195, 255, 0.5)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-      >
-        <h2>Technology stack</h2>
-
-        <p>
-          Trackmate is built using a modern, lightweight front-end stack with a strong
-          emphasis on performance, clarity, and maintainability.
-        </p>
-
-        <ul className="about-list tech-list">
-          <li className="tech-item">
-            <span className="tech-icon">
-              {/* React */}
-              <svg className="react" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="2" />
-                <ellipse cx="12" cy="12" rx="10" ry="4" />
-                <ellipse cx="12" cy="12" rx="4" ry="10" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>React</strong>
-              <p>
-                Component-based architecture for predictable state management and
-                reusable UI primitives.
-              </p>
-            </div>
-          </li>
-
-          <li className="tech-item">
-            <span className="tech-icon">
-              {/* JavaScript */}
-              <svg className="js" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16v16H4z" />
-                <path d="M8 8h4v8" />
-                <path d="M12 16h4" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>JavaScript (ES6+)</strong>
-              <p>
-                Modern language features for clean, readable, and expressive logic.
-              </p>
-            </div>
-          </li>
-
-          <li className="tech-item">
-            <span className="tech-icon">
-              {/* CSS */}
-              <svg className="css" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 3l2 18 6 2 6-2 2-18z" />
-                <path d="M8 7h8" />
-                <path d="M8 11h8" />
-                <path d="M8 15h4" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>CSS</strong>
-              <p>
-                Hand-written styles focused on simplicity, responsiveness, and calm
-                visual hierarchy without heavy UI frameworks.
-              </p>
-            </div>
-          </li>
-
-          <li className="tech-item">
-            <span className="tech-icon">
-              {/* Framer Motion */}
-              <svg className="fm" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="10" rx="2" /> <path d="M7 10v4" />
-                <path d="M11 10v4" /> <path d="M11 10h4v3" /> <path d="M15 10v4" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Framer Motion</strong>
-              <p>
-                Used selectively for subtle transitions and micro-interactions that
-                enhance feedback without distraction.
-              </p>
-            </div>
-          </li>
-
-          <li className="tech-item">
-            <span className="tech-icon">
-              {/* Local Storage */}
-              <svg className="lcapi" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3" />
-                <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Local Storage API</strong>
-              <p>
-                Enables fast, offline-capable, client-side persistence without external
-                dependencies.
-              </p>
-            </div>
-          </li>
-        </ul>
-
-        <p>
-          The application follows a local-first architecture, with React state as the
-          single source of truth and persistence handled transparently in the
-          background.
-        </p>
-      </motion.section>
-
-
-      {/* REAL LIFE */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(255, 201, 201, 0.5)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-      >
-        <h2>How this helps in real life</h2>
-
-        <ul className="about-list">
-          <li>Eliminates the need to remember where and when you applied</li>
-          <li>Prevents missed interviews or forgotten follow-ups</li>
-          <li>
-            Provides a clear sense of progress during long application cycles
-          </li>
-          <li>Offers structure without pressure</li>
-        </ul>
-
-        <p>
-          It’s designed to support consistency and awareness - not urgency or
-          anxiety.
-        </p>
-      </motion.section>
-
-      {/* FUTURE */}
-      <motion.section
-        className="about-section"
-        variants={{ ...sectionVariant, hover: {
-            scale: 1.015,
-            backgroundColor: "rgba(197, 197, 197, 0.5)",
-          },
-        }}
-        whileHover={canHover ? "hover" : undefined}
-      >
-        <h2>What’s coming next</h2>
-
-        <ul className="about-list feature-list">
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Functional insights */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="4" y1="20" x2="4" y2="10" />
-                <line x1="10" y1="20" x2="10" y2="4" />
-                <line x1="16" y1="20" x2="16" y2="14" />
-                <line x1="22" y1="20" x2="22" y2="8" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Functional insights</strong>
-              <p>
-                Clicking on an insight card shall show the data filtered out of all the existing data
-                (applicatons / important dates).
-              </p>
-            </div>
-          </li>
+        {/* WHAT IT DOES */}
+        <motion.div className="about-section-new" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <Target size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">What this app does</h2>
+          </div>
+          <p className="section-description">
+            Trackmate provides a centralized workspace to:
+          </p>
           
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Dark mode */}
-              <svg width="22" height="22" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" strokeWidth="2"
-                strokeLinecap="round" strokeLinejoin="round"
-              >
-                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-              </svg>
-            </span>
+          <ul className="about-list-new">
+            <li>Keep track of job applications with status (Applied/ Interview/ Offer/ Rejected)</li>
+            <li>
+              Maintain important dates such as interviews, follow-ups, and
+              deadlines
+            </li>
+            <li>Surface high-level insights without overwhelming the user</li>
+            <li>
+              Keep all data stored locally for speed, privacy, and reliability
+            </li>
+          </ul>
 
-            <div>
-              <strong>Dark mode</strong>
-              <p>
-                A theme-aware interface designed for low-light usage and accessibility,
-                scheduled for a future iteration.
-              </p>
+          <p className="section-description">
+            The goal is not to replace large job portals, but to act as a personal
+            execution and awareness layer during the job application process.
+          </p>
+        </motion.div>
+
+        {/* WHY */}
+        <motion.div className="about-section-new highlight-section" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <Heart size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">Why I built this</h2>
+          </div>
+          
+          <p className="section-description">
+            During active job applications, I found that existing tools were
+            either:
+          </p>
+
+          <ul className="about-list-new">
+            <li>Too complex for individual use</li>
+            <li>Built around recruiters rather than applicants</li>
+            <li>
+              Overloaded with features that added noise instead of clarity
+            </li>
+          </ul>
+
+          <p className="section-description">I wanted a tool that:</p>
+
+          <ul className="about-list-new">
+            <li>Updates instantly</li>
+            <li>Feels calm rather than stressful</li>
+            <li>Gives visibility without micromanagement</li>
+            <li>Respects user data by default</li>
+          </ul>
+
+          <p className="section-description">
+            Trackmate was built to solve that gap - a personal, intentional system
+            rather than a generic dashboard.
+          </p>
+        </motion.div>
+
+        {/* FEATURES */}
+        <motion.div className="about-section-new" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <Sparkles size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">Existing features</h2>
+          </div>
+
+          <div className="features-list-new">
+            <div className="feature-item-new">
+              <div className="feature-icon-wrapper">
+                <Briefcase size={22} strokeWidth={2.5} />
+              </div>
+              <div className="feature-content">
+                <h4>Application tracking</h4>
+                <p>
+                  Keep track of job applications with clear status of application (Applied/ Interview/ Offer/ Rejected), notes per
+                  application, and flexible search and filtering across all fields.
+                </p>
+              </div>
             </div>
-          </li>
 
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Job discovery */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="7" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Job discovery support</strong>
-              <p>
-                Light job search integration with the ability to save opportunities
-                and track them before submitting an application.
-              </p>
+            <div className="feature-item-new">
+              <div className="feature-icon-wrapper">
+                <Calendar size={22} strokeWidth={2.5} />
+              </div>
+              <div className="feature-content">
+                <h4>Important dates</h4>
+                <p>
+                  Manage interviews, follow-ups, and deadlines with smart "days left"
+                  indicators and automatic prioritization of upcoming and overdue events.
+                </p>
+              </div>
             </div>
-          </li>
 
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* ATS-aware tooling */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="4" y="3" width="16" height="18" rx="2" />
-                <line x1="8" y1="7" x2="16" y2="7" />
-                <line x1="8" y1="11" x2="16" y2="11" />
-                <line x1="8" y1="15" x2="12" y2="15" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>ATS-aware tooling</strong>
-              <p>
-                Resume and job desciption upload and scanning to show ATS compatibility and score.
-              </p>
+            <div className="feature-item-new">
+              <div className="feature-icon-wrapper">
+                <TrendingUp size={22} strokeWidth={2.5} />
+              </div>
+              <div className="feature-content">
+                <h4>Insights</h4>
+                <p>
+                  View derived statistics and upcoming activity highlights based on your
+                  tracked applications and important dates.
+                </p>
+              </div>
             </div>
-          </li>
 
-
-          <li className="feature-item">
-            <span className="feature-icon">
-              {/* Multi-user */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="9" cy="7" r="4" />
-                <circle cx="17" cy="7" r="4" />
-                <path d="M2 21v-2a5 5 0 0 1 5-5h4" />
-                <path d="M14 14h3a5 5 0 0 1 5 5v2" />
-              </svg>
-            </span>
-
-            <div>
-              <strong>Multi-user support (later)</strong>
-              <p>
-                Optional accounts with cross-device sync, while remaining
-                privacy-first by design.
-              </p>
+            <div className="feature-item-new">
+              <div className="feature-icon-wrapper">
+                <Database size={22} strokeWidth={2.5} />
+              </div>
+              <div className="feature-content">
+                <h4>Local-first persistence</h4>
+                <p>
+                  All data is stored locally in the browser, ensuring fast performance,
+                  offline reliability, and complete privacy without external services.
+                </p>
+              </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </motion.div>
 
-        <p style={{ marginTop: "16px" }}>
-          Each feature will be added only if it meaningfully improves clarity,
-          usefulness, or user control.
-        </p>
-      </motion.section>
+        {/* TECH STACK */}
+        <motion.div className="about-section-new" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <Code2 size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">Technology stack</h2>
+          </div>
+          
+          <p className="section-description">
+            Trackmate is built using a modern, lightweight front-end stack with a strong
+            emphasis on performance, clarity, and maintainability.
+          </p>
 
+          <div className="tech-list-new">
+            <div className="tech-item-new">
+              <FaReact size={40} className="tech-icon-direct react-color" />
+              <div className="tech-content">
+                <h4>React</h4>
+                <p>
+                  Component-based architecture for predictable state management and
+                  reusable UI primitives.
+                </p>
+              </div>
+            </div>
 
-      {/* FOOTER */}
-      <section className="about-footer">
-        <p>Built with care, patience, and intent. 
+            <div className="tech-item-new">
+              <FaJs size={40} className="tech-icon-direct js-color" />
+              <div className="tech-content">
+                <h4>JavaScript (ES6+)</h4>
+                <p>
+                  Modern language features for clean, readable, and expressive logic.
+                </p>
+              </div>
+            </div>
 
-        <br></br>
-          Designed for focus, not noise.</p>
-        <p className="signature">© 2026 Sourin Majumdar</p>
-      </section>
-    </motion.div>
+            <div className="tech-item-new">
+              <FaCss3Alt size={40} className="tech-icon-direct css-color" />
+              <div className="tech-content">
+                <h4>CSS</h4>
+                <p>
+                  Hand-written styles focused on simplicity, responsiveness, and calm
+                  visual hierarchy without heavy UI frameworks.
+                </p>
+              </div>
+            </div>
 
-    {showScrollTop && (
-      <button
-        className="scroll-top-btn"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" strokeWidth="2">
-          <polyline points="18 15 12 9 6 15" />
-        </svg>
-      </button>
+            <div className="tech-item-new">
+              <SiFramer size={40} className="tech-icon-direct motion-color" />
+              <div className="tech-content">
+                <h4>Framer Motion</h4>
+                <p>
+                  Used selectively for subtle transitions and micro-interactions that
+                  enhance feedback without distraction.
+                </p>
+              </div>
+            </div>
+
+            <div className="tech-item-new">
+              <Database size={40} strokeWidth={2} className="tech-icon-direct storage-color" />
+              <div className="tech-content">
+                <h4>Local Storage API</h4>
+                <p>
+                  Enables fast, offline-capable, client-side persistence without external
+                  dependencies.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="section-description">
+            The application follows a local-first architecture, with React state as the
+            single source of truth and persistence handled transparently in the
+            background.
+          </p>
+        </motion.div>
+
+        {/* REAL LIFE */}
+        <motion.div className="about-section-new" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <CheckCircle2 size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">How this helps in real life</h2>
+          </div>
+
+          <ul className="about-list-new">
+            <li>Eliminates the need to remember where and when you applied</li>
+            <li>Prevents missed interviews or forgotten follow-ups</li>
+            <li>
+              Provides a clear sense of progress during long application cycles
+            </li>
+            <li>Offers structure without pressure</li>
+          </ul>
+
+          <p className="section-description">
+            It's designed to support consistency and awareness - not urgency or
+            anxiety.
+          </p>
+        </motion.div>
+
+        {/* FUTURE FEATURES */}
+        <motion.div className="about-section-new" variants={sectionVariant}>
+          <div className="section-icon-header">
+            <Sparkles size={24} strokeWidth={2.5} className="header-icon" />
+            <h2 className="section-title-new">What's coming next</h2>
+          </div>
+
+          <div className="future-list-new">
+            <div className="future-item-new">
+              <div className="future-icon-wrapper">
+                <TrendingUp size={20} strokeWidth={2.5} />
+              </div>
+              <div className="future-content">
+                <h4>Functional insights</h4>
+                <p>
+                  Clicking on an insight card shall show the data filtered out of all the existing data
+                  (applicatons / important dates).
+                </p>
+              </div>
+            </div>
+            
+            <div className="future-item-new">
+              <div className="future-icon-wrapper">
+                <Moon size={20} strokeWidth={2.5} />
+              </div>
+              <div className="future-content">
+                <h4>Dark mode</h4>
+                <p>
+                  A theme-aware interface designed for low-light usage and accessibility,
+                  scheduled for a future iteration.
+                </p>
+              </div>
+            </div>
+
+            <div className="future-item-new">
+              <div className="future-icon-wrapper">
+                <Search size={20} strokeWidth={2.5} />
+              </div>
+              <div className="future-content">
+                <h4>Job discovery support</h4>
+                <p>
+                  Light job search integration with the ability to save opportunities
+                  and track them before submitting an application.
+                </p>
+              </div>
+            </div>
+
+            <div className="future-item-new">
+              <div className="future-icon-wrapper">
+                <FileText size={20} strokeWidth={2.5} />
+              </div>
+              <div className="future-content">
+                <h4>ATS-aware tooling</h4>
+                <p>
+                  Resume and job desciption upload and scanning to show ATS compatibility and score.
+                </p>
+              </div>
+            </div>
+
+            <div className="future-item-new">
+              <div className="future-icon-wrapper">
+                <Users size={20} strokeWidth={2.5} />
+              </div>
+              <div className="future-content">
+                <h4>Multi-user support (later)</h4>
+                <p>
+                  Optional accounts with cross-device sync, while remaining
+                  privacy-first by design.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="section-description" style={{ marginTop: "24px" }}>
+            Each feature will be added only if it meaningfully improves clarity,
+            usefulness, or user control.
+          </p>
+        </motion.div>
+
+        {/* FOOTER */}
+        <motion.div className="about-footer-new" variants={sectionVariant}>
+          <div className="footer-content-new">
+            <Heart size={24} strokeWidth={2.5} className="footer-heart" />
+            <p className="footer-text-new">
+              Built with care, patience, and intent.<br />
+              Designed for focus, not noise.
+            </p>
+          </div>
+          <p className="footer-signature">© 2026 Sourin Majumdar</p>
+        </motion.div>
+      </motion.div>
+
+      {showScrollTop && (
+        <motion.button
+          className="scroll-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+        >
+          <ArrowUp size={20} strokeWidth={2.5} />
+        </motion.button>
       )}
     </>
   );

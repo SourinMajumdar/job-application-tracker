@@ -1,7 +1,20 @@
 import Insights from "./Insights";
 import { Briefcase, Calendar, Info, ArrowRight } from 'lucide-react';
+import { signOut } from "firebase/auth";
+import { auth } from "../data/firebase"; 
+import { useAuth } from "../context/AuthContext";
+
 
 function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], dates = []}) {
+  const {logout} = useAuth();
+  async function handleLogout() {
+    try {
+      await signOut(auth);
+      console.log("User logged out");
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  }
 
   return (
     <>
@@ -18,21 +31,22 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
             <span className="app-name">track<span style={{color: 'rgb(255, 221, 0)'}}>mate</span></span>
           </a>
         </div>
+
+        <button onClick={handleLogout} className="logout-btn">
+          Log out
+        </button>
+
       </div>
 
       <div className="home-container">
         {/* HERO SECTION */}
         <div className="hero-section">
           <div className="hero-content">
-            <div className="hero-badge">
-              <Briefcase size={16} strokeWidth={2.5} />
-              <span>Job Application Tracker</span>
-            </div>
             <h1 className="hero-title">
               Manage Your <span className="gradient-text">Job Hunt</span>
             </h1>
             <p className="hero-subtitle">
-              Track applications, schedule interviews, and land your dream job — all in one beautiful interface
+              Track applications. Manage important dates. Stay effortlessly on top.
             </p>
           </div>
           <div className="hero-illustration">
