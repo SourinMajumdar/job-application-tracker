@@ -115,7 +115,7 @@
 }
 
 /* --- Primary Button --- */
-.primary-btn {
+.login-btn {
   width: 100%;
   margin-top: 12px;
   padding: 14px;
@@ -129,12 +129,12 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.primary-btn:hover {
+.login-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 20px rgba(40, 164, 6, 0.25);
 }
 
-.primary-btn:active {
+.login-btn:active {
   transform: translateY(0);
 }
 

@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import initialDates from "../data/importantDates";
 import ImportantDateCard from "./ImportantDateCard";
 import "../Dates.css";
 import { getDaysDiff, getStatusFromDate } from "../utils/dateUtils";
+import {
+  addImportantDate,
+  deleteImportantDate,
+  getImportantDates
+} from "../data/firestore";
+
 
 function formatToday() {
   return new Date().toLocaleDateString("en-GB", {
@@ -12,11 +17,7 @@ function formatToday() {
   });
 }
 
-function ImportantDates() {
-  const [dates, setDates] = useState(() => {
-    const saved = localStorage.getItem("importantDates");
-    return saved ? JSON.parse(saved) : initialDates;
-  });
+function ImportantDates({ dates, setDates, user }) {
   
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
@@ -31,36 +32,37 @@ function ImportantDates() {
   const [dateToDelete, setDateToDelete] = useState(null);
   
   /* ---------- Save (add / update) ---------- */
-  function handleSaveDate(e) {
+  async function handleSaveDate(e) {
     e.preventDefault();
-  
-    if (editingDate) {
-      // UPDATE
-      setDates(prev =>
-        prev.map(item =>
-          item.id === editingDate.id
-            ? { ...item, date, description }
-            : item
-        )
-      );
-    } else {
-      // ADD
-      setDates(prev => [
-        {
-          id: Date.now(),
-          date,
-          description,
-          status: "upcoming", // default
-        },
-        ...prev,
-      ]);
+    if (!user) return;
+
+    const dateData = {
+      date,
+      description,
+    };
+
+    try {
+      if (editingDate) {
+        // Simple MVP: delete + re-add
+        await deleteImportantDate(user.uid, editingDate.id);
+        await addImportantDate(user.uid, dateData);
+      } else {
+        await addImportantDate(user.uid, dateData);
+      }
+
+      const updated = await getImportantDates(user.uid);
+      setDates(updated);
+
+      setShowModal(false);
+      setEditingDate(null);
+      setDate("");
+      setDescription("");
+    } catch (err) {
+      console.error("Failed to save date:", err);
+      alert("Failed to save date.");
     }
-  
-    setShowModal(false);
-    setEditingDate(null);
-    setDate("");
-    setDescription("");
   }
+
   
   /* ---------- FILTER + SORT ---------- */
 
@@ -103,11 +105,6 @@ function ImportantDates() {
     return daysB - daysA;
   });
 
-  /* ---------- PERSIST ---------- */
-
-  useEffect(() => {
-    localStorage.setItem("importantDates", JSON.stringify(dates));
-  }, [dates]);
 
   /*---------- SCROLL TO TOP BUTTON ---------- */
   useEffect(() => {
@@ -121,12 +118,17 @@ function ImportantDates() {
 
   /* ---------- DELETE ---------- */
 
-  function handleDeleteConfirm() {
-    if (!dateToDelete) return;
+  async function handleDeleteConfirm() {
+    if (!dateToDelete || !user) return;
 
-    setDates(prev =>
-      prev.filter(item => item.id !== dateToDelete.id)
-    );
+    try {
+      await deleteImportantDate(user.uid, dateToDelete.id);
+      const updated = await getImportantDates(user.uid);
+      setDates(updated);
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("Failed to delete date.");
+    }
 
     setShowDeleteConfirm(false);
     setDateToDelete(null);

@@ -10,7 +10,7 @@ function formatDate(dateString) {
   });
 }
 
-function Insights({ jobs = [], dates = [] }) {
+function Insights({ jobs = [], dates = [], onFilterClick }) {
   /* -------- STATS -------- */
 
   const stats = jobs.reduce(
@@ -50,7 +50,10 @@ function Insights({ jobs = [], dates = [] }) {
 
         {/* TOP ROW */}
         <div className="stats-top">
-          <div className="stat-card total">
+          <div className="stat-card total"
+            onClick={() => onFilterClick?.("All")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="stat-icon-wrapper total-icon">
               <Briefcase size={32} strokeWidth={2.5} />
             </div>
@@ -60,7 +63,10 @@ function Insights({ jobs = [], dates = [] }) {
             </div>
           </div>
 
-          <div className="stat-card applied">
+          <div className="stat-card applied"
+            onClick={() => onFilterClick?.("Applied")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="stat-icon-wrapper applied-icon">
               <CheckCircle size={28} strokeWidth={2.5} />
             </div>
@@ -73,7 +79,10 @@ function Insights({ jobs = [], dates = [] }) {
 
         {/* BOTTOM ROW */}
         <div className="stats-bottom">
-          <div className="stat-card interview">
+            <div className="stat-card interview"
+              onClick={() => onFilterClick?.("Interview")}
+              style={{ cursor: "pointer" }}
+            >
             <div className="stat-icon-wrapper interview-icon">
               <Calendar size={24} strokeWidth={2.5} />
             </div>
@@ -83,7 +92,10 @@ function Insights({ jobs = [], dates = [] }) {
             </div>
           </div>
 
-          <div className="stat-card offer">
+          <div className="stat-card offer"
+            onClick={() => onFilterClick?.("Offer")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="stat-icon-wrapper offer-icon">
               <Trophy size={24} strokeWidth={2.5} />
             </div>
@@ -93,7 +105,10 @@ function Insights({ jobs = [], dates = [] }) {
             </div>
           </div>
 
-          <div className="stat-card rejected">
+          <div className="stat-card rejected"
+            onClick={() => onFilterClick?.("Rejected")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="stat-icon-wrapper rejected-icon">
               <CircleX size={24} strokeWidth={2.5} />
             </div>
@@ -113,13 +128,24 @@ function Insights({ jobs = [], dates = [] }) {
           <div className="soon-list">
             {soonDates.map(item => (
               <div key={item.id} className="soon-card">
-                <div className="soon-date-badge">
-                  <Calendar size={16} strokeWidth={2.5} />
-                  {item.daysLeft === 0 ? "Today" : item.daysLeft === 1 ? "Tomorrow" : `${item.daysLeft} days`}
+                {/* Description */}
+                <div className="soon-desc">
+                  {item.description}
                 </div>
-                <div className="soon-desc">{item.description}</div>
-                <div className="soon-meta">
-                  {formatDate(item.date)}
+
+                {/* Meta Row: Date + Days Badge */}
+                <div className="soon-meta-row">
+                  <div className="soon-meta">
+                    {formatDate(item.date)}
+                  </div>
+
+                  <div className="soon-date-badge">
+                    {item.daysLeft === 0
+                      ? "Today"
+                      : item.daysLeft === 1
+                      ? "Tomorrow"
+                      : `${item.daysLeft} days`}
+                  </div>
                 </div>
               </div>
             ))}
@@ -132,6 +158,7 @@ function Insights({ jobs = [], dates = [] }) {
             <p className="empty-soon">Nothing coming up soon</p>
           </div>
         )}
+
       </div>
     </div>
   );

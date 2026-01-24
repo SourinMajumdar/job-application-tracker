@@ -148,7 +148,7 @@ function Auth() {
 
           <button
             type="submit"
-            className="primary-btn full-width"
+            className="login-btn full-width"
             disabled={loading}
           >
             {loading

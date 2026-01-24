@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 
 function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], dates = []}) {
-  const {logout} = useAuth();
+  // const {logout} = useAuth();
   async function handleLogout() {
     try {
       await signOut(auth);
@@ -59,13 +59,13 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
         </div>
 
         {/* INSIGHTS */}
-        <Insights jobs={jobs} dates={dates} />
+        <Insights jobs={jobs} dates={dates} onFilterClick={(status) => goToApplications(status)} />
 
         {/* ACTIONS */}
         <div className="actions-section">
           <h3 className="actions-title">Quick Actions</h3>
           <div className="home-actions">
-            <button className="primary-action" onClick={goToApplications}>
+            <button className="primary-action" onClick={() => goToApplications("All")}>
               <Briefcase size={20} strokeWidth={2.5} />
               <span>View Applications</span>
               <ArrowRight size={18} strokeWidth={2.5} className="arrow-icon" />

@@ -1,15 +1,11 @@
-import initialJobs from "../data/jobs";
 import ApplicationCard from "./ApplicationCard";
 import { useState, useEffect, useRef } from "react";
+import { addJob, deleteJob, getJobs } from "../data/firestore";
 
-function Dashboard() {
-  const [selectedStatus, setSelectedStatus] = useState("All");
+function Dashboard({ jobs, setJobs, user, initialStatusFilter = "All" }) {
+  const [selectedStatus, setSelectedStatus] = useState(initialStatusFilter);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [jobs, setJobs] = useState(() => {
-    const savedJobs = localStorage.getItem("jobs");
-    return savedJobs ? JSON.parse(savedJobs) : initialJobs;
-  });
 
   const [showModal, setShowModal] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
@@ -34,22 +30,25 @@ function Dashboard() {
   const filteredJobs = jobs
   // 🔹 STATUS FILTER
   .filter(job =>
-    selectedStatus === "All" ? true
-    : job.status.toLowerCase() === selectedStatus.toLowerCase()
+    selectedStatus === "All"
+      ? true
+      : (job.status || "").toLowerCase() === String(selectedStatus).toLowerCase()
   )
 
   // 🔹 SEARCH FILTER
   .filter(job => {
     if (!searchTerm) return true;
     const query = searchTerm.toLowerCase();
+
     return (
-      job.company.toLowerCase().includes(query) ||
-      job.role.toLowerCase().includes(query) ||
-      job.status.toLowerCase().includes(query) ||
+      (job.company || "").toLowerCase().includes(query) ||
+      (job.role || "").toLowerCase().includes(query) ||
+      (job.status || "").toLowerCase().includes(query) ||
       (job.notes || "").toLowerCase().includes(query) ||
       (job.appliedDate || "").includes(query)
     );
   })
+
 
   // 🔹 SORT
   .sort((a, b) => new Date(b.appliedDate) - new Date(a.appliedDate));
@@ -57,47 +56,45 @@ function Dashboard() {
 
   /* ---------------- ADD / UPDATE ---------------- */
 
-  function handleAddApplication(e) {
+  async function handleAddApplication(e) {
     e.preventDefault();
 
-    if (editingJob) {
-      setJobs(prev =>
-        prev.map(job =>
-          job.id === editingJob.id
-            ? { ...job, company, role, appliedDate, status, notes }
-            : job
-        )
-      );
-    } else {
-      setJobs(prev => [
-        {
-          id: Date.now(),
-          company,
-          role,
-          appliedDate,
-          status,
-          notes,
-        },
-        ...prev,
-      ]);
+    if (!user) return;
+
+    const jobData = {
+      company,
+      role,
+      appliedDate,
+      status,
+      notes,
+    };
+
+    try {
+      if (editingJob) {
+        // 🔴 For now: simple approach = delete + re-add
+        await deleteJob(user.uid, editingJob.id);
+        await addJob(user.uid, jobData);
+      } else {
+        await addJob(user.uid, jobData);
+      }
+
+      const updated = await getJobs(user.uid);
+      setJobs(updated);
+
+      // reset
+      setCompany("");
+      setRole("");
+      setAppliedDate("");
+      setStatus("Applied");
+      setNotes("");
+      setEditingJob(null);
+      setShowModal(false);
+      setFocusField("company");
+    } catch (err) {
+      console.error("Failed to save job:", err);
+      alert("Failed to save job. Try again.");
     }
-
-    // reset
-    setCompany("");
-    setRole("");
-    setAppliedDate("");
-    setStatus("Applied");
-    setNotes("");
-    setEditingJob(null);
-    setShowModal(false);
-    setFocusField("company");
   }
-
-  /* ---------------- PERSIST ---------------- */
-
-  useEffect(() => {
-    localStorage.setItem("jobs", JSON.stringify(jobs));
-  }, [jobs]);
 
   /* ---------------- PREFILL FORM ---------------- */
 
@@ -143,6 +140,12 @@ function Dashboard() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // ---------- RESET FILTER ON PROP CHANGE -------- //
+  useEffect(() => {
+    setSelectedStatus(initialStatusFilter || "All");
+  }, [initialStatusFilter]);
+
 
   /* ---------------- RENDER ---------------- */
 
@@ -340,19 +343,25 @@ function Dashboard() {
 
               <button
                 className="delete-btn"
-                onClick={() => {
-                  if (!jobToDelete) return;
+                onClick={async () => {
+                  if (!jobToDelete || !user) return;
 
-                  setJobs(prev =>
-                    prev.filter(job => job.id !== jobToDelete.id)
-                  );
+                  try {
+                    await deleteJob(user.uid, jobToDelete.id);
+                    const updated = await getJobs(user.uid);
+                    setJobs(updated);
+                  } catch (err) {
+                    console.error("Delete failed:", err);
+                    alert("Failed to delete job.");
+                  }
 
                   setShowDeleteConfirm(false);
                   setJobToDelete(null);
                 }}
-              ><span className="date-delete">Delete</span>
-                
+              >
+                <span className="date-delete">Delete</span>
               </button>
+
             </div>
           </div>
         </div>

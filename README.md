@@ -1,7 +1,8 @@
-# Trackmate – Job Application Tracker
+# 💼 Trackmate (Job Application Tracker)
 
-Trackmate is a frontend web application that helps users **track job applications, monitor application statuses, and manage important hiring dates** in one place.  
-It is designed to be simple, clean, and focused on improving personal job application workflows.
+Trackmate is a modern web application that helps users track j**ob applications, monitor application statuses, and manage important hiring dates** - all in one clean, intuitive dashboard.
+
+It is designed to be fast, focused, and frictionless, helping users stay organized and in control of their job search.
 
 🔗 **Live Demo:** https://trackmateui.netlify.app
 
@@ -10,12 +11,24 @@ It is designed to be simple, clean, and focused on improving personal job applic
 ## ✨ Features
 
 - Add, edit, and delete job applications
+
 - Track application status (Applied, Interview, Offer, Rejected, etc.)
+
+- Clickable insights dashboard for quick filtering
+
 - Manage important hiring dates such as follow-ups and deadlines
-- Search and filter applications based on status
-- Persistent data storage using browser localStorage
-- Clean dashboard-style UI
-- Smooth intro animations and UI transitions
+
+- Search and filter applications in real time
+
+- User authentication (Firebase Auth)
+
+- Cloud data persistence (Firestore)
+
+- Clean, dashboard-style UI
+
+- Smooth intro animations and micro-interactions
+
+- Responsive design for desktop and mobile
 
 ---
 
@@ -24,25 +37,31 @@ It is designed to be simple, clean, and focused on improving personal job applic
 - **Frontend:** React.js (Functional Components)
 - **Language:** JavaScript (ES6+)
 - **Build Tool:** Vite
-- **Styling:** HTML5, CSS3, Flexbox
+- **Styling:** CSS3, Flexbox
 - **Animations:** Framer Motion
-- **Storage:** Browser localStorage
+- **Authentication**: Firebase Auth
+- **Database:** Firebase Firestore
 - **Deployment:** Netlify
+
 
 ---
 
 ## 🎯 Project Motivation
 
-Keeping track of multiple job applications across different platforms can quickly become overwhelming.  
-Trackmate was built to provide a **centralized, lightweight solution** for organizing applications and important dates without requiring authentication or backend services.
+Managing job applications across multiple platforms can quickly become overwhelming.
+Trackmate was built to provide **a centralized, lightweight, and visually intuitive solution** for organizing applications and important dates - reducing mental load and improving follow-up discipline.
+
+The project also serves as a real-world showcase of **state management, cloud integration, UI/UX design, and frontend architecture**.
 
 ---
 
 ## 📸 Screens & UI
 
 - Animated intro screen for a polished first impression
-- Dashboard-style layout focused on clarity and usability
+- Insights dashboard with clickable stat cards
 - Modal-based forms for adding and editing data
+- Clean card-based application layout
+- Smooth hover states and micro-interactions
 
 ---
 
@@ -80,23 +99,22 @@ This generates an optimized production build in the `dist` folder.
 
 ## 📌 Notes
 
-- This is a **client-side, single-user application**
-- No authentication or backend is used
-- All data is stored locally in the browser
+- Secure authentication using Firebase
+- Cloud-based data storage with Firestore
+- Each user has isolated, private application data
+- Designed as a scalable frontend architecture
 
 ---
 
 ## 🔮 Future improvements
 
 - Dark mode support
-- Functional insights
 - Job search support
 - ATS-aware tooling
-- Multi-user support
 
 ---
 
 ## 👤 Author
 
 Built by **Sourin**  
-Frontend-focused project showcasing React, UI design, and client-side state management.
+Frontend-focused project showcasing React, UI design, and real-world application architecture.

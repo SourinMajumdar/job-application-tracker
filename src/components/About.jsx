@@ -1,25 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
-  Briefcase, 
-  Calendar, 
-  TrendingUp, 
-  Database, 
-  Code2, 
-  Palette, 
-  Zap, 
-  Moon, 
-  Search, 
-  FileText, 
-  Users,
-  Heart,
-  ArrowUp,
-  Sparkles,
-  Target,
-  CheckCircle2
+  Briefcase, Calendar, TrendingUp, Database, 
+  Code2, Moon, Search, FileText, Heart, Settings2 ,
+  ArrowUp, Sparkles, Target, CheckCircle2
 } from 'lucide-react';
 import {FaReact, FaJs, FaCss3Alt} from 'react-icons/fa';
 import { SiFramer } from "react-icons/si";
+import { TiCloudStorage } from "react-icons/ti";
+
+import FirebaseIcon from '../assets/firebasesvg.svg';
 
 const containerVariant = {
   hidden: {},
@@ -65,22 +55,31 @@ function About() {
           <h1 className="about-title-new">
             About <span className="gradient-text-about">Trackmate</span>
           </h1>
-          <p className="about-subtitle-new">
-            Trackmate is a focused, single-user web application designed to help
-            individuals track job applications and important career-related dates
-            in a structured, low-distraction environment.
-          </p>
-          <p className="about-subtitle-new">
-            It is intentionally minimal, local-first, and privacy-respecting -
-            built to solve a very specific problem well.
-          </p>
+
+          <div className="about-hero-boxes">
+            <div className="about-hero-box box1">
+              <p>
+                Trackmate is a focused, personal web application designed to help
+                individuals track job applications and important career-related dates
+                in a structured, low-distraction environment.
+              </p>
+            </div>
+
+            <div className="about-hero-box box2">
+              <p>
+                It combines a calm, distraction-free interface with secure cloud sync,
+                allowing users to access their data across devices while keeping full
+                control over their personal information.
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         {/* WHAT IT DOES */}
         <motion.div className="about-section-new" variants={sectionVariant}>
           <div className="section-icon-header">
-            <Target size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">What this app does</h2>
+            <Target size={24} strokeWidth={2.5} className="header-icon" />
           </div>
           <p className="section-description">
             Trackmate provides a centralized workspace to:
@@ -94,7 +93,8 @@ function About() {
             </li>
             <li>Surface high-level insights without overwhelming the user</li>
             <li>
-              Keep all data stored locally for speed, privacy, and reliability
+              Keep all data securely synced to your private account for access
+              across devices while maintaining privacy by design
             </li>
           </ul>
 
@@ -107,8 +107,8 @@ function About() {
         {/* WHY */}
         <motion.div className="about-section-new highlight-section" variants={sectionVariant}>
           <div className="section-icon-header">
-            <Heart size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">Why I built this</h2>
+            <Heart size={24} strokeWidth={2.5} className="header-icon" />
           </div>
           
           <p className="section-description">
@@ -142,8 +142,8 @@ function About() {
         {/* FEATURES */}
         <motion.div className="about-section-new" variants={sectionVariant}>
           <div className="section-icon-header">
-            <Sparkles size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">Existing features</h2>
+            <Settings2 size={24} strokeWidth={2.5} className="header-icon" />
           </div>
 
           <div className="features-list-new">
@@ -178,10 +178,11 @@ function About() {
                 <TrendingUp size={22} strokeWidth={2.5} />
               </div>
               <div className="feature-content">
-                <h4>Insights</h4>
+                <h4>Interactive Insights</h4>
                 <p>
                   View derived statistics and upcoming activity highlights based on your
-                  tracked applications and important dates.
+                  tracked applications and important dates. Click on insight cards to instantly navigate to filtered application
+                  views for faster analysis.
                 </p>
               </div>
             </div>
@@ -191,10 +192,10 @@ function About() {
                 <Database size={22} strokeWidth={2.5} />
               </div>
               <div className="feature-content">
-                <h4>Local-first persistence</h4>
+                <h4>Private cloud sync & per-user isolation</h4>
                 <p>
-                  All data is stored locally in the browser, ensuring fast performance,
-                  offline reliability, and complete privacy without external services.
+                  All data is securely stored in your private account and automatically
+                  synced across devices, with strict per-user data isolation by design.
                 </p>
               </div>
             </div>
@@ -204,13 +205,13 @@ function About() {
         {/* TECH STACK */}
         <motion.div className="about-section-new" variants={sectionVariant}>
           <div className="section-icon-header">
-            <Code2 size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">Technology stack</h2>
+            <Code2 size={24} strokeWidth={2.5} className="header-icon" />
           </div>
           
           <p className="section-description">
-            Trackmate is built using a modern, lightweight front-end stack with a strong
-            emphasis on performance, clarity, and maintainability.
+            Trackmate is built using a modern, serverless full-stack architecture, 
+            focused on performance, clarity, security, and long-term maintainability.
           </p>
 
           <div className="tech-list-new">
@@ -258,29 +259,44 @@ function About() {
             </div>
 
             <div className="tech-item-new">
-              <Database size={40} strokeWidth={2} className="tech-icon-direct storage-color" />
+              <img
+                src={FirebaseIcon}
+                alt="Firebase"
+                className="tech-icon-direct firebase-icon"
+              />
               <div className="tech-content">
-                <h4>Local Storage API</h4>
+                <h4>Firebase</h4>
                 <p>
-                  Enables fast, offline-capable, client-side persistence without external
-                  dependencies.
+                  Secure user authentication with protected sessions, ensuring that each
+                  user only has access to their own private data.
                 </p>
               </div>
             </div>
+            <div className="tech-item-new">
+              <TiCloudStorage size={40} className="tech-icon-direct storage-color" />
+              <div className="tech-content">
+                <h4>Cloud Firestore</h4>
+                <p>
+                  Cloud-hosted NoSQL database providing real-time sync, per-user data
+                  isolation, and seamless cross-device persistence.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           <p className="section-description">
-            The application follows a local-first architecture, with React state as the
-            single source of truth and persistence handled transparently in the
-            background.
+            The application follows a serverless full-stack architecture, with React
+            on the client and a secure cloud backend for authentication, data storage,
+            and per-user access control.
           </p>
         </motion.div>
 
         {/* REAL LIFE */}
         <motion.div className="about-section-new" variants={sectionVariant}>
           <div className="section-icon-header">
-            <CheckCircle2 size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">How this helps in real life</h2>
+            <CheckCircle2 size={24} strokeWidth={2.5} className="header-icon" />
           </div>
 
           <ul className="about-list-new">
@@ -301,24 +317,11 @@ function About() {
         {/* FUTURE FEATURES */}
         <motion.div className="about-section-new" variants={sectionVariant}>
           <div className="section-icon-header">
-            <Sparkles size={24} strokeWidth={2.5} className="header-icon" />
             <h2 className="section-title-new">What's coming next</h2>
+            <Sparkles size={24} strokeWidth={2.5} className="header-icon" />
           </div>
 
           <div className="future-list-new">
-            <div className="future-item-new">
-              <div className="future-icon-wrapper">
-                <TrendingUp size={20} strokeWidth={2.5} />
-              </div>
-              <div className="future-content">
-                <h4>Functional insights</h4>
-                <p>
-                  Clicking on an insight card shall show the data filtered out of all the existing data
-                  (applicatons / important dates).
-                </p>
-              </div>
-            </div>
-            
             <div className="future-item-new">
               <div className="future-icon-wrapper">
                 <Moon size={20} strokeWidth={2.5} />
@@ -356,19 +359,6 @@ function About() {
                 </p>
               </div>
             </div>
-
-            <div className="future-item-new">
-              <div className="future-icon-wrapper">
-                <Users size={20} strokeWidth={2.5} />
-              </div>
-              <div className="future-content">
-                <h4>Multi-user support (later)</h4>
-                <p>
-                  Optional accounts with cross-device sync, while remaining
-                  privacy-first by design.
-                </p>
-              </div>
-            </div>
           </div>
 
           <p className="section-description" style={{ marginTop: "24px" }}>
@@ -380,7 +370,11 @@ function About() {
         {/* FOOTER */}
         <motion.div className="about-footer-new" variants={sectionVariant}>
           <div className="footer-content-new">
-            <Heart size={24} strokeWidth={2.5} className="footer-heart" />
+            
+            <p className="gradient-text-about" style={{
+              fontSize:"25px", fontWeight:"700", margin:"0"
+            }}
+            ><Heart size={20} strokeWidth={2.5} className="footer-heart" /> Trackmate</p>
             <p className="footer-text-new">
               Built with care, patience, and intent.<br />
               Designed for focus, not noise.
