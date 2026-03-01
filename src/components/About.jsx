@@ -369,18 +369,17 @@ function About() {
 
         {/* FOOTER */}
         <motion.div className="about-footer-new" variants={sectionVariant}>
-          <div className="footer-content-new">
-            
-            <p className="gradient-text-about" style={{
-              fontSize:"25px", fontWeight:"700", margin:"0"
-            }}
-            ><Heart size={20} strokeWidth={2.5} className="footer-heart" /> Trackmate</p>
-            <p className="footer-text-new">
-              Built with care, patience, and intent.<br />
+          <div className="about-footer-card">
+            <div className="about-footer-brand">
+              <span className="about-footer-logo">track<span className="about-footer-logo-accent">mate</span></span>
+            </div>
+            <p className="about-footer-tagline">
+              Built with care, patience, and intent.<br/>
               Designed for focus, not noise.
             </p>
+            <div className="about-footer-divider" />
+            <p className="about-footer-copy">© {new Date().getFullYear()} Sourin Majumdar</p>
           </div>
-          <p className="footer-signature">© 2026 Sourin Majumdar</p>
         </motion.div>
       </motion.div>
 

@@ -183,15 +183,34 @@
   position: relative;
 }
 
-/* Today date (true center) */
+/* Today date pill */
 .today-center {
-  top: -35px;  
+  top: -35px;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   font-size: 18px;
   color: #2a2d33;
   font-weight: 500;
+}
+
+.today-pill {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #15803d;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12);
 }
 
 /* ---------- Mobile tweaks ---------- */

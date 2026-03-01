@@ -23,19 +23,20 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
       </div>
     
       <div className="home-topbar">
-        <div className="rotate">
-          <a href="https://github.com/SourinMajumdar/job-application-tracker.git"
-            target="_blank" 
-            rel="noopener noreferrer" 
-            style={{textDecoration: 'none'}}>
-            <span className="app-name">track<span style={{color: 'rgb(255, 221, 0)'}}>mate</span></span>
-          </a>
+        <div className="topbar-inner">
+          <div className="rotate">
+            <a href="https://github.com/SourinMajumdar/job-application-tracker.git"
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{textDecoration: 'none'}}>
+              <span className="app-name">track<span className="app-name-accent">mate</span></span>
+            </a>
+          </div>
+
+          <button onClick={handleLogout} className="logout-btn">
+            Log out
+          </button>
         </div>
-
-        <button onClick={handleLogout} className="logout-btn">
-          Log out
-        </button>
-
       </div>
 
       <div className="home-container">
@@ -99,11 +100,16 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
       </div>
 
       <footer className="home-footer">
-        © {new Date().getFullYear()}  
-        <a href="https://github.com/SourinMajumdar/job-application-tracker.git"
-          target="_blank" style={{textDecoration: 'none', color: 'rgba(25, 47, 118, 0.71)', fontWeight: 'bold'}}> trackmate </a>· 
-        <a href="https://github.com/SourinMajumdar" 
-          target="_blank" style={{textDecoration: 'none', color: 'rgba(0, 0, 0, 0.61)'}}> Sourin Majumdar</a>
+        <div className="home-footer-inner">
+          <span className="home-footer-brand">track<span className="home-footer-brand-accent">mate</span></span>
+          <span className="home-footer-sep">·</span>
+          <a href="https://github.com/SourinMajumdar/job-application-tracker.git"
+            target="_blank" rel="noopener noreferrer" className="home-footer-link">GitHub</a>
+          <span className="home-footer-sep">·</span>
+          <a href="https://github.com/SourinMajumdar"
+            target="_blank" rel="noopener noreferrer" className="home-footer-link">Sourin Majumdar</a>
+        </div>
+        <p className="home-footer-copy">© {new Date().getFullYear()} All rights reserved</p>
       </footer>
     </>
   );

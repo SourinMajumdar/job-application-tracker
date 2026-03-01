@@ -25,7 +25,7 @@ function highlightText(text, searchTerm) {
 function ApplicationCard({ job, searchTerm, onEdit, onDelete, onOpenNotes }) {
 
   return (
-    <div className="card">
+    <div className={`card card--${job.status.toLowerCase()}`}>
       {/* MAIN CARD */}
       <div className="card-main">
         <div className="card-left">
