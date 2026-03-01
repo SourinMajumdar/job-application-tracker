@@ -1832,65 +1832,64 @@ textarea:focus {
   text-align: justify;
 }
 
-/* ── ABOUT FOOTER — subtle, clean ───────────────── */
+/* ── ABOUT FOOTER — dark + green ────────────────── */
 .about-footer-new {
   margin-top: 60px;
-  padding: 40px 0 24px;
-  text-align: center;
-  position: relative;
-}
-
-/* fading gradient separator line */
-.about-footer-new::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 200px; height: 2px;
-  background: linear-gradient(to right, transparent, #c4b5fd, #a5b4fc, transparent);
-  border-radius: 999px;
+  padding-top: 0;
+  border-top: none;
 }
 
 .about-footer-card {
-  background: transparent;
+  background: #0f172a;
+  border-radius: 20px;
+  padding: 40px 32px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* green gradient top strip */
+.about-footer-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #028b34, #34d399, #028b34);
 }
 
 .about-footer-brand {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .about-footer-logo {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 900;
   letter-spacing: 0.5px;
-  color: #374151;
+  color: #ffffff;
 }
 
 .about-footer-logo-accent {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #34d399;
 }
 
 .about-footer-tagline {
   font-size: 14px;
   line-height: 1.7;
-  color: #9ca3af;
-  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 22px;
   font-style: italic;
 }
 
 .about-footer-divider {
-  width: 32px;
+  width: 36px;
   height: 1px;
-  background: #e5e7eb;
-  margin: 0 auto 16px;
+  background: rgba(52, 211, 153, 0.25);
+  margin: 0 auto 18px;
 }
 
 .about-footer-copy {
   font-size: 12px;
-  color: #d1d5db;
+  color: rgba(255, 255, 255, 0.25);
   margin: 0;
   letter-spacing: 0.04em;
 }
