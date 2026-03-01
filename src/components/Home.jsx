@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Insights from "./Insights";
 import { Briefcase, Calendar, Info, ArrowRight } from 'lucide-react';
 import { signOut } from "firebase/auth";
@@ -6,7 +7,8 @@ import { useAuth } from "../context/AuthContext";
 
 
 function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], dates = []}) {
-  // const {logout} = useAuth();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   async function handleLogout() {
     try {
       await signOut(auth);
@@ -33,7 +35,7 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
             </a>
           </div>
 
-          <button onClick={handleLogout} className="logout-btn">
+          <button onClick={() => setShowLogoutModal(true)} className="logout-btn">
             Log out
           </button>
         </div>
@@ -98,6 +100,31 @@ function Home({ goToApplications, goToImportantDates, goToAbout, jobs = [], date
           </svg> Back to top
         </button>
       </div>
+
+      {showLogoutModal && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <h3 style={{ marginBottom: "8px" }}>Log out?</h3>
+            <p style={{ color: "#6b7280", fontSize: "14px", margin: "0 0 24px" }}>
+              Are you sure you want to log out of Trackmate?
+            </p>
+            <div className="modal-actions">
+              <button
+                className="secondary-btn"
+                onClick={() => setShowLogoutModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="delete-btn date-delete"
+                onClick={handleLogout}
+              >
+                Log out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="home-footer">
         <div className="home-footer-inner">
