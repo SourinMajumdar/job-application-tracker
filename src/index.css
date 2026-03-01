@@ -1832,73 +1832,65 @@ textarea:focus {
   text-align: justify;
 }
 
-/* ── ABOUT FOOTER — dark bookend card ───────────── */
+/* ── ABOUT FOOTER — subtle, clean ───────────────── */
 .about-footer-new {
   margin-top: 60px;
-  padding-top: 0;
-  border-top: none;
+  padding: 40px 0 24px;
+  text-align: center;
+  position: relative;
+}
+
+/* fading gradient separator line */
+.about-footer-new::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 2px;
+  background: linear-gradient(to right, transparent, #c4b5fd, #a5b4fc, transparent);
+  border-radius: 999px;
 }
 
 .about-footer-card {
-  background: #0f172a;
-  border-radius: 20px;
-  padding: 40px 32px 32px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* top gradient glow strip */
-.about-footer-card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(to right, #667eea, #764ba2, #34d399);
-}
-
-/* background ambient glow */
-.about-footer-card::after {
-  content: "";
-  position: absolute;
-  bottom: -60px; left: 50%; transform: translateX(-50%);
-  width: 300px; height: 200px;
-  background: radial-gradient(ellipse, rgba(102,126,234,0.15) 0%, transparent 70%);
-  pointer-events: none;
+  background: transparent;
 }
 
 .about-footer-brand {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .about-footer-logo {
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 900;
   letter-spacing: 0.5px;
-  color: #ffffff;
+  color: #374151;
 }
 
 .about-footer-logo-accent {
-  color: #34d399;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-footer-tagline {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.55);
-  margin: 0 0 24px;
+  color: #9ca3af;
+  margin: 0 0 20px;
+  font-style: italic;
 }
 
 .about-footer-divider {
-  width: 40px;
+  width: 32px;
   height: 1px;
-  background: rgba(255,255,255,0.15);
-  margin: 0 auto 20px;
+  background: #e5e7eb;
+  margin: 0 auto 16px;
 }
 
 .about-footer-copy {
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
+  font-size: 12px;
+  color: #d1d5db;
   margin: 0;
   letter-spacing: 0.04em;
 }
