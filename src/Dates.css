@@ -3,31 +3,41 @@
 .date-card {
   display: flex;
   justify-content: space-between;
-  padding: 14px 16px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  height: 60px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  background-color: #e5e7eb;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  min-height: 60px;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.07));
+  border: 1.5px solid transparent;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  background-color: #f1f5f9;
+  border-left-width: 4px;
+  border-left-color: #94a3b8;
 }
 
 .date-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px) translateX(2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.11);
   z-index: 10;
 }
 
 .date-card.soon {
-  background-color: #fee2e2;
+  background-color: #fff5f5;
+  border-color: #fecaca;
+  border-left-color: #ef4444;
 }
 
 .date-card.upcoming {
-  background-color: #fef9c3;
+  background-color: #fefce8;
+  border-color: #fde68a;
+  border-left-color: #f59e0b;
 }
 
 .date-card.past {
-  background-color: #e5e7eb;
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  border-left-color: #94a3b8;
+  opacity: 0.75;
 }
 .date-row {
   display: flex;
@@ -71,11 +81,17 @@
   border-radius: 999px;
   border: none;
 
-  background-color: #028b34;
+  background: linear-gradient(135deg, #028b34 0%, #04a83e 100%);
   color: white;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(2, 139, 52, 0.35);
 
   transition: all 0.2s ease;
+}
+
+.add-date-btn:hover {
+  box-shadow: 0 4px 14px rgba(2, 139, 52, 0.5);
+  transform: translateY(-1px);
 }
 
 .add-date-text {
