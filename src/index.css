@@ -1863,7 +1863,7 @@ textarea:focus {
 }
 
 .about-footer-logo-accent {
-  color: #028b34;
+  color: #34d399;
 }
 
 .about-footer-tagline {
@@ -2434,7 +2434,7 @@ textarea:focus {
     width: 100%;
     border-radius: 20px;
   }
-  .home-topbar {transform: translateY(30px);}
+  .home-topbar { transform: none; }
 }
 
 .scroll-hint {
